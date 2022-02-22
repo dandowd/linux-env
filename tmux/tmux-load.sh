@@ -17,66 +17,70 @@ end() {
 	tmux select-pane -t 0
 }
 
-WINDOW_ONE="server"
-WINDOW_ONE_LOCATION="~/Work/server"
+BASE_LOC="~/Work"
 
-tmux new-window -n $WINDOW_ONE
+# server
+tmux new-window -n "server"
 create_layout
 
 sync_panes on
-tmux send-keys "cd $WINDOW_ONE_LOCATION" Enter
+tmux send-keys "cd $BASE_LOC/server" Enter
 clear_console
 sync_panes off
 
 tmux select-pane -t 0
 tmux send-keys "npm start" Enter
 
-WINDOW_TWO="neatify"
-WINDOW_TWO_LOCATION="~/Work/mortgage-dashboard-client"
-
-tmux new-window -n $WINDOW_TWO
+# neatify
+tmux new-window -n "neatify"
 create_layout
 
 sync_panes on
-tmux send-keys "cd $WINDOW_TWO_LOCATION" Enter
+tmux send-keys "cd $BASE_LOC/mortgage-dashboard-client" Enter
 clear_console
 sync_panes off
 
 tmux select-pane -t 0
 tmux send-keys "npm start"
 
-WINDOW_THREE="application"
-WINDOW_THREE_LOCATION="~/Work/application"
-
-
-tmux new-window -n $WINDOW_THREE
+# application
+tmux new-window -n "application"
 create_layout
 
 sync_panes on
-tmux send-keys "cd $WINDOW_THREE_LOCATION" Enter
+tmux send-keys "cd $BASE_LOC/application" Enter
 clear_console
 sync_panes off
 
 tmux select-pane -t 0
 tmux send-keys "npm start"
 
-WINDOW_FOUR="order"
-WINDOW_FOUR_LOCATION="~/Work/order-service"
-
-tmux new-window -n $WINDOW_FOUR
+# order-service
+tmux new-window -n "order"
 create_layout
 
 sync_panes on
-tmux send-keys "cd $WINDOW_FOUR_LOCATION" Enter
+tmux send-keys "cd $BASE_LOC/order-service" Enter
 clear_console
 sync_panes off
 
 tmux select-pane -t 0
 tmux send-keys "npm start"
 
-WINDOW_FIVE="db"
+# domo-service
+tmux new-window -n "domo"
+create_layout
 
-tmux new-window -n $WINDOW_FIVE
+sync_panes on
+tmux send-keys "cd $BASE_LOC/domo-service" Enter
+clear_console
+sync_panes off
+
+tmux select-pane -t 0
+tmux send-keys "npm start"
+
+# db window
+tmux new-window -n "db"
 tmux send-keys "sudo -i -u postgres"
 create_layout
 tmux send-keys mongosh Enter
