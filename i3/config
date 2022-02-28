@@ -191,7 +191,9 @@ bindsym Ctrl+$mod+Print exec --no-startup-id maim --window $(xdotool getactivewi
 bindsym Ctrl+Shift+Print exec --no-startup-id maim --select | xclip -selection clipboard -t image/png
 
 # Load workspace layouts
-exec --no-startup-id "i3-msg 'workspace1; append_layout /home/$USER/Work/workspace-1.json'"
+exec --no-startup-id "i3-msg 'workspace 1; append_layout /home/tanto/Work/workspace-1.json'"
+exec --no-startup-id "i3-msg 'workspace 2; append_layout /home/tanto/Work/workspace-2.json'"
+exec --no-startup-id "i3-msg 'workspace 3; append_layout /home/tanto/Work/workspace-3.json'"
 
 # Set default resolution
 exec --no-startup-id xrandr -s 5120x1440
