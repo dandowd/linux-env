@@ -85,4 +85,13 @@ tmux send-keys "sudo -i -u postgres"
 create_layout
 tmux send-keys mongosh Enter
 
+# neat-core-js
+tmux new-window -n "neat-core"
+create_layout
+
+sync_panes on
+tmux send-keys "cd $BASE_LOC/neat-core-js" Enter
+clear_console
+sync_panes off
+
 end
