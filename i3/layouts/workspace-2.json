@@ -1,0 +1,41 @@
+// vim:ts=4:sw=4:et
+{
+    "border": "normal",
+    "current_border_width": 2,
+    "floating": "auto_off",
+    "geometry": {
+       "height": 1405,
+       "width": 2556,
+       "x": 2,
+       "y": 16
+    },
+    "name": "Slack | boulder | Neat Capital",
+    "percent": 0.5,
+    "swallows": [
+       {
+       "class": "^Slack$"
+       }
+    ],
+    "type": "con"
+}
+
+{
+    "border": "normal",
+    "current_border_width": 2,
+    "floating": "auto_off",
+    "geometry": {
+       "height": 1405,
+       "width": 1311,
+       "x": 12,
+       "y": 26
+    },
+    "name": "New Tab - Google Chrome",
+    "percent": 0.5,
+    "swallows": [
+       {
+         "class": "^Google\\-chrome$"
+       }
+    ],
+    "type": "con"
+}
+

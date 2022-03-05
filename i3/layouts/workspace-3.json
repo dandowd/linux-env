@@ -1,0 +1,40 @@
+// vim:ts=4:sw=4:et
+{
+    "border": "normal",
+    "current_border_width": 2,
+    "floating": "auto_off",
+    "geometry": {
+       "height": 1405,
+       "width": 5116,
+       "x": 2,
+       "y": 16
+    },
+    "name": "Discord",
+    "percent": 0.234309895833333,
+    "swallows": [
+       {
+         "class": "^discord$"
+       }
+    ],
+    "type": "con"
+}
+
+{
+    "border": "normal",
+    "current_border_width": 2,
+    "floating": "auto_off",
+    "geometry": {
+       "height": 1405,
+       "width": 2556,
+       "x": 2572,
+       "y": 26
+    },
+    "name": "New Tab - Google Chrome",
+    "percent": 0.524544270833333,
+    "swallows": [
+       {
+         "class": "^Google\\-chrome$"
+       }
+    ],
+    "type": "con"
+}
