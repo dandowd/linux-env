@@ -1,19 +1,20 @@
 // vim:ts=4:sw=4:et
+
 {
     "border": "normal",
     "current_border_width": 2,
     "floating": "auto_off",
     "geometry": {
-       "height": 1080,
-       "width": 1418,
-       "x": 2,
+       "height": 459,
+       "width": 734,
+       "x": 0,
        "y": 0
     },
-    "name": "Google Chrome",
-    "percent": 0.256934286347518,
+    "name": "Terminal",
+    "percent": 0.25,
     "swallows": [
        {
-         "class": "^Google\\-chrome$"
+         "class": "^Gnome\\-terminal$"
        }
     ],
     "type": "con"
@@ -30,7 +31,7 @@
        "y": 45
     },
     "name": "Visual Studio Code",
-    "percent": 0.501724567819149,
+    "percent": 0.50,
     "swallows": [
        {
           "class": "^Code$"
@@ -44,18 +45,17 @@
     "current_border_width": 2,
     "floating": "auto_off",
     "geometry": {
-       "height": 459,
-       "width": 734,
-       "x": 0,
+       "height": 1080,
+       "width": 1418,
+       "x": 2,
        "y": 0
     },
-    "name": "Terminal",
-    "percent": 0.241341145833333,
+    "name": "Google Chrome",
+    "percent": 0.25,
     "swallows": [
        {
-         "class": "^Gnome\\-terminal$"
+         "class": "^Google\\-chrome$"
        }
     ],
     "type": "con"
 }
-
