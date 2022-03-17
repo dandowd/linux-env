@@ -11,3 +11,6 @@ chmod 700 /home/$USER/Work/tmux-load.sh
 
 cp services/neat-services.sh /home/$USER/Work
 chmod 700 /home/$USER/Work/neat-services.sh
+
+cp git/git-all-status.sh /home/$USER/.bin
+chmod 700 /home/$USER/.bin/git-all-status.sh
