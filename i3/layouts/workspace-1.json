@@ -11,7 +11,7 @@
        "y": 0
     },
     "name": "Terminal",
-    "percent": 0.25,
+    "percent": 0.20,
     "swallows": [
        {
          "class": "^Gnome\\-terminal$"
@@ -31,7 +31,7 @@
        "y": 45
     },
     "name": "Visual Studio Code",
-    "percent": 0.50,
+    "percent": 0.55,
     "swallows": [
        {
           "class": "^Code$"
