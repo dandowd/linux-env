@@ -3,14 +3,14 @@
 cp i3/config /home/$USER/.i3/config
 cp i3/layouts/* /home/$USER/.i3/layouts
 
-cp tmux/battle.sh /home/$USER/Work
+cp tmux/battle /home/$USER/Work
 chmod 700 /home/$USER/Work/battle
 
-cp tmux/tmux-load.sh /home/$USER/Work
+cp tmux/tmux-load /home/$USER/Work
 chmod 700 /home/$USER/Work/tmux-load
 
-cp services/neat-services.sh /home/$USER/Work
-chmod 700 /home/$USER/Work/neat-services
+cp services/neat-services /home/$USER/.bin
+chmod 700 /home/$USER/.bin/neat-services
 
-cp git/git-all-status.sh /home/$USER/.bin
+cp git/git-all-status /home/$USER/.bin
 chmod 700 /home/$USER/.bin/git-all-status
