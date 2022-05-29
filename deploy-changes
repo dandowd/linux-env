@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env zsh
 
 cp i3/config /home/$USER/.i3/config
 cp i3/layouts/* /home/$USER/.i3/layouts

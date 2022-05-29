@@ -1,12 +1,12 @@
-#!/usr/bin/shell env
+#!/usr/bin/env zsh
 
-req_dirs=("/home/$USER/Work" "/home/$USER/.i3" "/home/$USER/.i3/layouts" "/home/$USER/.bin")
+req_dirs=("/home/$USER/Work" "/home/$USER/.i3/layouts" "/home/$USER/.bin")
 
 for dir in ${req_dirs[@]}; do
 	if [ ! -d $dir ]
 	then
 		echo "creating $dir"
-		mkdir $dir
+		mkdir -p $dir
 	else
 		echo "$dir already exists"
 	fi
