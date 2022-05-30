@@ -14,7 +14,7 @@
     "percent": 0.20,
     "swallows": [
        {
-         "class": "^Gnome\\-terminal$"
+         "class": "^Alacritty$"
        }
     ],
     "type": "con"

@@ -178,7 +178,13 @@ bindsym $mod+r mode "resize"
 # finds out, if available)
 bar {
         status_command i3status
+	position top
 }
+
+# i3 gaps
+# Required: disable window title bars
+for_window [class=".*"] border pixel 2
+gaps inner 15
 
 # Screenshots
 bindsym Print exec --no-startup-id maim "/home/$USER/Pictures/$(date)"
