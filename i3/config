@@ -191,16 +191,16 @@ bindsym Ctrl+$mod+Print exec --no-startup-id maim --window $(xdotool getactivewi
 bindsym Ctrl+Shift+Print exec --no-startup-id maim --select | xclip -selection clipboard -t image/png
 
 # Load workspace layouts
-exec --no-startup-id "i3-msg 'workspace 1; append_layout /home/tanto/.i3/layouts/workspace-1.json'"
+exec --no-startup-id "i3-msg 'workspace 1; append_layout /home/tanto/.config/i3/layouts/workspace-1.json'"
 exec --no-startup-id i3-msg "workspace 1; exec google-chrome"
 exec --no-startup-id i3-msg "workspace 1; exec code"
 exec --no-startup-id i3-msg "workspace 1; exec gnome-terminal"
 
-exec --no-startup-id "i3-msg 'workspace 2; append_layout /home/tanto/.i3/layouts/workspace-2.json'"
+exec --no-startup-id "i3-msg 'workspace 2; append_layout /home/tanto/.config/i3/layouts/workspace-2.json'"
 exec --no-startup-id i3-msg "workspace 2; exec slack"
 exec --no-startup-id i3-msg "workspace 2; exec google-chrome outlook.office.com/mail"
 
-exec --no-startup-id "i3-msg 'workspace 3; append_layout /home/tanto/.i3/layouts/workspace-3.json'"
+exec --no-startup-id "i3-msg 'workspace 3; append_layout /home/tanto/.config/i3/layouts/workspace-3.json'"
 exec --no-startup-id i3-msg "workspace 3; exec discord"
 exec --no-startup-id i3-msg "workspace 3; exec google-chrome"
 exec --no-startup-id i3-msg "workspace 3; exec spotify"
