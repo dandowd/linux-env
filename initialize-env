@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 
-req_dirs=("/home/$USER/Work" "/home/$USER/.config/i3/layouts" "/home/$USER/.config/i3/i3status" "/home/$USER/.bin")
+req_dirs=("/home/$USER/Work" "/home/$USER/.config/i3/layouts" "/home/$USER/.config/i3status" "/home/$USER/.bin")
 
 for dir in ${req_dirs[@]}; do
 	if [ ! -d $dir ]
