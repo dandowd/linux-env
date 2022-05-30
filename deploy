@@ -2,6 +2,7 @@
 
 cp i3/config /home/$USER/.config/i3
 cp i3/layouts/* /home/$USER/.config/i3/layouts
+cp i3/i3status/config /home/$USER/.config/i3/i3status/config
 
 cp tmux/battle /home/$USER/Work
 chmod 700 /home/$USER/Work/battle
