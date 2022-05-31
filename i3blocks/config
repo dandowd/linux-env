@@ -1,0 +1,4 @@
+[volume-pulseaudio]
+command="/home/$USER/.config/i3blocks/scripts/volume-pulseaudio"
+interval=once
+signal=1
