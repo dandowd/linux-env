@@ -1,4 +1,15 @@
 [volume-pulseaudio]
-command="/home/$USER/.config/i3blocks/scripts/volume-pulseaudio"
+command=$SCRIPT_DIR/volume-pulseaudio
 interval=once
 signal=1
+
+[mediaplayer]
+command=$SCRIPT_DIR/mediaplayer
+instance=spotify
+interval=5
+signal=10
+
+[click]
+full_text=Click me!
+command=echo "Got clicked with button $SCRIPT_DIR"
+color=#F79494
