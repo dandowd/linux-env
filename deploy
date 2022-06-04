@@ -7,6 +7,7 @@ cp -r i3blocks/* /home/$USER/.config/i3blocks/
 cp tmux/battle /home/$USER/Work
 chmod 700 /home/$USER/Work/battle
 
+cp tmux/tmux.conf /home/.tmux.conf
 cp tmux/tmux-load /home/$USER/Work
 chmod 700 /home/$USER/Work/tmux-load
 
