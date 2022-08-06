@@ -1,0 +1,17 @@
+[user]
+	email = danieldowd89@gmail.com
+	name = Dan Dowd
+[credential "https://github.com"]
+	helper = 
+	helper = !/usr/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper = 
+	helper = !/usr/bin/gh auth git-credential
+[fetch]
+	prune = true
+[pull]
+	rebase = true
+[init]
+	defaultBranch = main
+[core]
+	editor = lvim
