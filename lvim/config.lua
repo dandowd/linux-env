@@ -45,15 +45,15 @@ lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
 
 -- Use which-key to add extra bindings with the leader-key prefix
 lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
-lvim.builtin.which_key.mappings["t"] = {
-  name = "+Trouble",
-  r = { "<cmd>Trouble lsp_references<cr>", "References" },
-  f = { "<cmd>Trouble lsp_definitions<cr>", "Definitions" },
-  d = { "<cmd>Trouble document_diagnostics<cr>", "Diagnostics" },
-  q = { "<cmd>Trouble quickfix<cr>", "QuickFix" },
-  l = { "<cmd>Trouble loclist<cr>", "LocationList" },
-  w = { "<cmd>Trouble workspace_diagnostics<cr>", "Wordspace Diagnostics" },
-}
+-- lvim.builtin.which_key.mappings["t"] = {
+--   name = "+Trouble",
+--   r = { "<cmd>Trouble lsp_references<cr>", "References" },
+--   f = { "<cmd>Trouble lsp_definitions<cr>", "Definitions" },
+--   d = { "<cmd>Trouble document_diagnostics<cr>", "Diagnostics" },
+--   q = { "<cmd>Trouble quickfix<cr>", "QuickFix" },
+--   l = { "<cmd>Trouble loclist<cr>", "LocationList" },
+--   w = { "<cmd>Trouble workspace_diagnostics<cr>", "Workspace Diagnostics" },
+-- }
 
 -- TODO: User Config for predefined plugins
 -- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
@@ -178,10 +178,26 @@ lvim.plugins = {
     branch = "release"
   },
   {
-    "vim-test/vim-test"
+    "nvim-neotest/neotest",
+    requires = {
+      "nvim-lua/plenary.nvim",
+      "nvim-treesitter/nvim-treesitter",
+      "antoinemadec/FixCursorHold.nvim",
+      "haydenmeade/neotest-jest"
+    },
+    config = function()
+      require("neotest").setup({
+        adapters = {
+          require("neotest-jest")
+        }
+      })
+    end
   },
   {
     "Mofiqul/vscode.nvim"
+  },
+  {
+    "APZelos/blamer.nvim"
   },
   { "mxsdev/nvim-dap-vscode-js", requires = { "mfussenegger/nvim-dap" } },
   {
@@ -194,7 +210,7 @@ lvim.plugins = {
 -- Dap setup
 require("dap-vscode-js").setup({
   -- node_path = "node", -- Path of node executable. Defaults to $NODE_PATH, and then "node"
-  debugger_path = "(runtimedir)/site/pack/packer/opt/vscode-js-debug", -- Path to vscode-js-debug installation.
+  debugger_path = "/home/tanto/.local/share/lunarvim/site/pack/packer/opt/vscode-js-debug", -- Path to vscode-js-debug installation.
   adapters = { 'pwa-node', 'pwa-chrome', 'pwa-msedge', 'node-terminal', 'pwa-extensionHost' }, -- which adapters to register in nvim-dap
 })
 
@@ -235,4 +251,17 @@ require("dap").configurations.typescript = dapJsConfig
 
 lvim.builtin.lualine.sections = {
   lualine_a = { 'mode' },
+}
+
+-- config Test
+lvim.builtin.which_key.mappings["t"] = {
+  name = "+Tests",
+  n = { "<cmd>lua require('neotest').run.run()<CR>", "Nearest" },
+  l = { "<cmd>lua require('neotest').run.run_last()<CR>", "Last" },
+  f = { "<cmd>lua require('neotest').run.run(vim.fn.expand('%'))<CR>", "File" },
+  o = { "<cmd>lua require('neotest').output.open()<CR>", "Output" },
+  s = { "<cmd>lua require('neotest').summary.toggle()<CR>", "Summary" },
+  d = { "<cmd>lua require('neotest').run.run({strategy = 'dap'})<CR>", "Debug" },
+  e = { "<cmd>lua require('dap.ui.widgets').centered_float(require('dap.ui.widgets').scopes)<CR>",
+    "Scopes" }
 }
