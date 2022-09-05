@@ -9,3 +9,4 @@ o.number=true
 vim.cmd [[ colorscheme nordfox ]]
 vim.cmd [[ set mouse=a ]]
 vim.cmd [[ set signcolumn=yes ]]
+vim.cmd [[ set clipboard=unnamedplus ]]

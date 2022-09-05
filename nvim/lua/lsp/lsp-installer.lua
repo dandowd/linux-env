@@ -7,8 +7,8 @@ function M.setup()
 
   masonconfig.setup()
   local servers = masonconfig.get_installed_servers();
-  
-  for index, server_name in pairs(servers) do
+
+  for _, server_name in pairs(servers) do
     lspconfig[server_name].setup {}
   end
 end
