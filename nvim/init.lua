@@ -1,4 +1,5 @@
-require('plugins')
-require('controls')
-require('settings')
-require('lsp')
+require "plugins"
+require "settings"
+require "controls"
+require "cmp-config"
+require "lsp"

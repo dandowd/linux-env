@@ -4,6 +4,7 @@ local reg = require("which-key").register
 
 reg({
   ["<leader>"] = {
+    a = { "<cmd>lua vim.lsp.buf.code_action()<CR>", "Code Actions" },
     f = {
       name = "+file",
       f = { "<cmd>Telescope find_files<cr>", "Find File"},
@@ -13,28 +14,8 @@ reg({
     h = { "<cmd>noh<cr>", "No Highlight" },
     l = {
       name = "+lsp",
-      d = { "<cmd>CocList diagnostics<cr>", "Diagnostics" }
+      d = { "<cmd>TroubleToggle document_diagnostics<cr>", "Diagnostics" },
+      w = { "<cmd>TroubleToggle workspace_diagnostics<cr>", "Workspace Diagnostics" }, 
     }
   }
 })
-
--- Coc
-vim.cmd [[ 
-inoremap <silent><expr> <TAB>
-      \ coc#pum#visible() ? coc#pum#next(1) :
-      \ CheckBackspace() ? "\<Tab>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
-]]
-
-vim.cmd [[ 
-inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
-                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-]]
-
-vim.cmd [[
-function! CheckBackspace() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-]]
