@@ -1,2 +1,2 @@
-require "lsp.lsp-installer"
+require("lsp.lsp-installer").setup()
 require "lsp.null-ls"
