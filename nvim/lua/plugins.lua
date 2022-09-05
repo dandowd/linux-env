@@ -66,7 +66,7 @@ return require("packer").startup(function(use)
   use { "L3MON4D3/LuaSnip" }
   use { "saadparwaiz1/cmp_luasnip" }
   use { "hrsh7th/nvim-cmp", tag = "v0.0.1" } -- The completion plugin
-  
+
   use "jose-elias-alvarez/null-ls.nvim"
   use {
     "folke/trouble.nvim",
@@ -78,5 +78,10 @@ return require("packer").startup(function(use)
         -- refer to the configuration section below
       }
     end
+  }
+  use {
+    'romgrk/barbar.nvim',
+    requires = {'kyazdani42/nvim-web-devicons'},
+    config = function () require("bufferline").setup() end
   }
 end)
