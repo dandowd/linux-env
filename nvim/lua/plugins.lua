@@ -31,25 +31,25 @@ return require("packer").startup(function(use)
   use "nvim-treesitter/nvim-treesitter"
   use {
     "folke/which-key.nvim",
-    config = function () require("which-key").setup() end
+    config = function() require("which-key").setup() end
   }
   use { "nvim-telescope/telescope-project.nvim" }
   use {
-  "nvim-telescope/telescope.nvim", tag = "0.1.0",
-    requires = { {"nvim-lua/plenary.nvim"} },
-    config = function () require"telescope".load_extension("project") end
+    "nvim-telescope/telescope.nvim", tag = "0.1.0",
+    requires = { { "nvim-lua/plenary.nvim" } },
+    config = function() require "telescope".load_extension("project") end
   }
   use {
     "nvim-lualine/lualine.nvim",
     requires = { "kyazdani42/nvim-web-devicons" },
-    config = function () require("lualine").setup() end
+    config = function() require("lualine").setup() end
   }
   use {
     "kyazdani42/nvim-tree.lua",
     requires = {
       "kyazdani42/nvim-web-devicons", -- optional, for file icons
     },
-    config = function () require("nvim-tree").setup() end,
+    config = function() require("nvim-tree").setup() end,
   }
   use {
     "williamboman/mason.nvim",
@@ -81,7 +81,13 @@ return require("packer").startup(function(use)
   }
   use {
     'romgrk/barbar.nvim',
-    requires = {'kyazdani42/nvim-web-devicons'},
-    config = function () require("bufferline").setup() end
+    requires = { 'kyazdani42/nvim-web-devicons' },
+    config = function() require("bufferline").setup() end
   }
+
+  use {
+    "microsoft/vscode-js-debug",
+    run = "npm install --legacy-peer-deps && npm run compile"
+  }
+  use { "mxsdev/nvim-dap-vscode-js", requires = { "mfussenegger/nvim-dap" } }
 end)

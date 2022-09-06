@@ -4,13 +4,20 @@ local reg = require("which-key").register
 
 reg({
   ["<leader>"] = {
-    a = { "<cmd>lua vim.lsp.buf.code_action()<CR>", "Code Actions" },
+    a = {
+      name = "+actions",
+      a = { "<cmd>lua vim.lsp.buf.code_action()<CR>", "Code Actions" },
+      r = { "<cmd>lua vim.lsp.buf.rename()<CR>", "Rename" },
+      f = { "<cmd>lua vim.lsp.buf.formatting()<CR>", "Format" }
+    },
     f = {
       name = "+files",
-      f = { "<cmd>Telescope find_files<cr>", "Find File"},
-      r = { "<cmd>Telescope oldfiles<cr>", "Open Recent File" },
+      f = { "<cmd>Telescope find_files<cr>", "Find Files"},
+      o = { "<cmd>Telescope oldfiles<cr>", "Old Files" },
       g = { "<cmd>Telescope live_grep<CR>", "Grep Files" },
-      b = { "<cmd>Telescope buffers<CR>", "Buffers" }
+      s = { "<cmd>Telescope grep_string<CR>", "Grep String" },
+      b = { "<cmd>Telescope buffers<CR>", "Buffers" },
+      r = { "<cmd>Telescope registers<CR>", "Registers" }
     },
     e = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
     h = { "<cmd>noh<cr>", "No Highlight" },
