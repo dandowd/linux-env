@@ -17,7 +17,8 @@ reg({
       g = { "<cmd>Telescope live_grep<CR>", "Grep Files" },
       s = { "<cmd>Telescope grep_string<CR>", "Grep String" },
       b = { "<cmd>Telescope buffers<CR>", "Buffers" },
-      r = { "<cmd>Telescope registers<CR>", "Registers" }
+      r = { "<cmd>Telescope registers<CR>", "Registers" },
+      m = { "<cmd>Telescope marks<CR>", "Marks" }
     },
     e = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
     h = { "<cmd>noh<cr>", "No Highlight" },
@@ -25,6 +26,7 @@ reg({
       name = "+diagnostics",
       d = { "<cmd>TroubleToggle document_diagnostics<cr>", "Diagnostics" },
       w = { "<cmd>TroubleToggle workspace_diagnostics<cr>", "Workspace Diagnostics" },
+      l = { "<cmd>lua vim.diagnostic.open_float()<CR>", "Line Diagnostics" }
     }
   }
 })

@@ -117,10 +117,10 @@ cmp.setup {
   },
   sources = {
     { name = "luasnip" },
+    { name = "nvim_lsp" },
     { name = "buffer" },
     { name = "path" },
     { name = "nvim_lua" },
-    { name = "nvim_lsp" },
     { name = "nvim_lsp_signature_help" }
   },
   confirm_opts = {
