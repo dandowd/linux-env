@@ -24,7 +24,7 @@ packer.init {
 }
 
 return require("packer").startup(function(use)
-  -- Packer can manage itself
+  -- Packer can managez itself
   use "wbthomason/packer.nvim"
   use "EdenEast/nightfox.nvim"
   use "mfussenegger/nvim-dap"
@@ -89,5 +89,5 @@ return require("packer").startup(function(use)
     "microsoft/vscode-js-debug",
     run = "npm install --legacy-peer-deps && npm run compile"
   }
-  use { "mxsdev/nvim-dap-vscode-js", requires = { "mfussenegger/nvim-dap" } }
+  use { "mxsdev/nvim-dap-vscode-js", requires = { "mfussenegger/nvim-dap", tag="v1.71.1" } }
 end)
