@@ -89,5 +89,22 @@ return require("packer").startup(function(use)
     "microsoft/vscode-js-debug",
     run = "npm install --legacy-peer-deps && npm run compile"
   }
-  use { "mxsdev/nvim-dap-vscode-js", requires = { "mfussenegger/nvim-dap", tag="v1.71.1" } }
+  use { "mxsdev/nvim-dap-vscode-js", requires = { "mfussenegger/nvim-dap", tag = "v1.71.1" } }
+  use {
+    "nvim-neotest/neotest",
+    requires = {
+      "nvim-lua/plenary.nvim",
+      "nvim-treesitter/nvim-treesitter",
+      "antoinemadec/FixCursorHold.nvim",
+      "haydenmeade/neotest-jest"
+    },
+    config = function()
+      require("neotest").setup({
+        adapters = {
+          require("neotest-jest")
+        }
+      })
+    end
+  }
+
 end)

@@ -1,9 +1,19 @@
 vim.g.mapleader = " "
 
 local reg = require("which-key").register
+local map = vim.api.nvim_set_keymap
+local opts = { noremap = true, silent = true }
+
+map("n", "<S-h", "<cmd>BufferPrevious<CR>", opts)
+map("n", "<S-l", "<cmd>BufferNext<CR>", opts)
 
 reg({
   ["<leader>"] = {
+    t = {
+      name = "+test",
+      n = { "<cmd>lua require('neotest').run.run()<CR>", "Nearest" },
+      f = { "<cmd>lua require('neotest').run.run(vim.fn.expand('%'))<CR>", "File" }
+    },
     a = {
       name = "+actions",
       a = { "<cmd>lua vim.lsp.buf.code_action()<CR>", "Code Actions" },
@@ -42,3 +52,4 @@ reg({
   },
   K = { "<cmd>lua vim.lsp.buf.hover()<CR>", "Hover" }
 })
+
