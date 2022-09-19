@@ -1,5 +1,4 @@
 local M = {}
-
 function M.setup()
   require("mason").setup()
   local masonconfig = require("mason-lspconfig")

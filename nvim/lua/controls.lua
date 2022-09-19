@@ -37,7 +37,8 @@ reg({
       d = { "<cmd>TroubleToggle document_diagnostics<cr>", "Diagnostics" },
       w = { "<cmd>TroubleToggle workspace_diagnostics<cr>", "Workspace Diagnostics" },
       l = { "<cmd>lua vim.diagnostic.open_float()<CR>", "Line Diagnostics" }
-    }
+    },
+    p = { "<cmd>lua require'telescope'.extensions.project.project{ display_type = 'full' }<CR>", "Projects" }
   }
 })
 

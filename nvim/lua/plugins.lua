@@ -27,6 +27,7 @@ return require("packer").startup(function(use)
   -- Packer can managez itself
   use "wbthomason/packer.nvim"
   use "EdenEast/nightfox.nvim"
+  use "sainnhe/everforest"
   use "mfussenegger/nvim-dap"
   use "nvim-treesitter/nvim-treesitter"
   use {
@@ -106,5 +107,5 @@ return require("packer").startup(function(use)
       })
     end
   }
-
+  use "folke/lua-dev.nvim"
 end)
