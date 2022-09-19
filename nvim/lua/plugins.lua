@@ -108,4 +108,5 @@ return require("packer").startup(function(use)
     end
   }
   use "folke/lua-dev.nvim"
+  use "b0o/SchemaStore.nvim"
 end)
