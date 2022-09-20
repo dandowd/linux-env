@@ -10,7 +10,6 @@ function M.setup()
   for _, server_name in pairs(servers) do
     local configLocation = string.format("lsp.configs.%s", server_name)
     if pcall(require, configLocation) then
-      print("using custom config for", server_name)
       local langSettings = require(configLocation)
       lspconfig[server_name].setup(langSettings)
     else
