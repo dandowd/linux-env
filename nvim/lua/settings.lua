@@ -1,5 +1,6 @@
 local o = vim.o
 local g = vim.g
+local opt = vim.opt
 
 o.tabstop=2
 o.shiftwidth=2
@@ -8,6 +9,10 @@ o.smartindent=true
 o.number=true
 
 g.cursorhold_updatetime = 100
+g.loaded = 1
+g.loaded_netrwPlugin = 1
+
+opt.termguicolors = true
 
 vim.cmd [[ set mouse=a ]]
 vim.cmd [[ set signcolumn=yes ]]

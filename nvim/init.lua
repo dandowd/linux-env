@@ -1,5 +1,5 @@
-require "plugins"
 require "settings"
+require "plugins"
 require "controls"
 require "cmp-config"
 require "lsp"

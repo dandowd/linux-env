@@ -50,7 +50,13 @@ return require("packer").startup(function(use)
     requires = {
       "kyazdani42/nvim-web-devicons", -- optional, for file icons
     },
-    config = function() require("nvim-tree").setup() end,
+    config = function()
+      require("nvim-tree").setup({
+        view = {
+          adaptive_size = true
+        }
+      })
+    end,
   }
   use {
     "williamboman/mason.nvim",
@@ -81,9 +87,10 @@ return require("packer").startup(function(use)
     end
   }
   use {
-    'romgrk/barbar.nvim',
-    requires = { 'kyazdani42/nvim-web-devicons' },
-    config = function() require("bufferline").setup() end
+    "akinsho/bufferline.nvim",
+    config = function()
+      require("bufferline").setup()
+    end
   }
 
   use {
@@ -91,22 +98,16 @@ return require("packer").startup(function(use)
     run = "npm install --legacy-peer-deps && npm run compile"
   }
   use { "mxsdev/nvim-dap-vscode-js", requires = { "mfussenegger/nvim-dap", tag = "v1.71.1" } }
-  use {
-    "nvim-neotest/neotest",
-    requires = {
-      "nvim-lua/plenary.nvim",
-      "nvim-treesitter/nvim-treesitter",
-      "antoinemadec/FixCursorHold.nvim",
-      "haydenmeade/neotest-jest"
-    },
-    config = function()
-      require("neotest").setup({
-        adapters = {
-          require("neotest-jest")
-        }
-      })
-    end
-  }
   use "folke/lua-dev.nvim"
   use "b0o/SchemaStore.nvim"
+  use { "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } }
+  use {
+    "akinsho/toggleterm.nvim",
+    config = function() require("toggleterm").setup {
+        direction = "float",
+        hidden = "true",
+        open_mapping = [[<c-t>]]
+      }
+    end
+  }
 end)
