@@ -24,6 +24,14 @@ function _open_tabbed_term()
   }):open()
 end
 
+function _open_horizontal_term()
+  Terminal:new({
+    hidden = false,
+    direction = "horizontal",
+    dir = "git_dir"
+  }):open()
+end
+
 map("n", "<S-h", "<cmd>BufferPrevious<CR>", opts)
 map("n", "<S-l", "<cmd>BufferNext<CR>", opts)
 
@@ -32,7 +40,8 @@ reg({
     x = {
       name = "+terminal",
       f = { "<cmd>ToggleTerm<CR>", "Floating" },
-      t = { "<cmd>lua _open_tabbed_term()<CR>", "Tabbed" }
+      t = { "<cmd>lua _open_tabbed_term()<CR>", "Tabbed" },
+      h = { "<cmd>lua _open_horizontal_term()<CR>", "Horizontal" }
     },
     g = { "<cmd>lua _lazygit_toggle()<CR>", "Git" },
     t = {
