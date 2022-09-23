@@ -29,7 +29,13 @@ return require("packer").startup(function(use)
   use "EdenEast/nightfox.nvim"
   use "sainnhe/everforest"
   use "mfussenegger/nvim-dap"
-  use "nvim-treesitter/nvim-treesitter"
+  use { "nvim-treesitter/nvim-treesitter",
+    config = function()
+      require("nvim-treesitter.configs").setup({
+        ensure_installed = { "typescript", "javascript", "lua" }
+      })
+    end
+  }
   use {
     "folke/which-key.nvim",
     config = function() require("which-key").setup() end
@@ -108,6 +114,22 @@ return require("packer").startup(function(use)
         hidden = "true",
         open_mapping = [[<c-t>]]
       }
+    end
+  }
+  use {
+    "nvim-neotest/neotest",
+    requires = {
+      "nvim-lua/plenary.nvim",
+      "nvim-treesitter/nvim-treesitter",
+      "antoinemadec/FixCursorHold.nvim",
+      "haydenmeade/neotest-jest"
+    },
+    config = function()
+      require("neotest").setup({
+        adapters = {
+          require("neotest-jest")
+        }
+      })
     end
   }
 end)
