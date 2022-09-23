@@ -1,3 +1,5 @@
+local dap = require("dap")
+
 require("dap-vscode-js").setup({
   -- node_path = "node", -- Path of node executable. Defaults to $NODE_PATH, and then "node"
   -- debugger_path = "(runtimedir)/site/pack/packer/opt/vscode-js-debug", -- Path to vscode-js-debug installation.
@@ -5,7 +7,7 @@ require("dap-vscode-js").setup({
 })
 
 for _, language in ipairs({ "typescript", "javascript" }) do
-  require("dap").configurations[language] = {
+  dap.configurations[language] = {
     {
       {
         type = "pwa-node",
@@ -13,6 +15,7 @@ for _, language in ipairs({ "typescript", "javascript" }) do
         name = "Launch file",
         program = "${file}",
         cwd = "${workspaceFolder}",
+        protocol = 'inspector',
       },
       {
         type = "pwa-node",
@@ -20,7 +23,9 @@ for _, language in ipairs({ "typescript", "javascript" }) do
         name = "Attach",
         processId = require 'dap.utils'.pick_process,
         cwd = "${workspaceFolder}",
-      }
+        protocol = 'inspector',
+      },
     }
   }
 end
+
