@@ -26,7 +26,7 @@ end
 
 function _open_horizontal_term()
   Terminal:new({
-    hidden = false,
+    hidden = true,
     direction = "horizontal",
     dir = "git_dir"
   }):open()
