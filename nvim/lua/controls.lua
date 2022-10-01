@@ -37,7 +37,8 @@ map("n", "<S-l>", "<cmd>bnext<CR>", opts)
 
 reg({
   ["<leader>"] = {
-    c = { "<cmd>bd<CR>", "Close Buffer" },
+    c = { "<cmd>confirm bd<CR>", "Close Buffer" },
+    q = { "<cmd>confirm qa<CR>", "Quit" },
     b = {
       name = "+bugger",
       t = { "<cmd>lua require'dap'.toggle_breakpoint()<CR>", "Toggle Breakpoint" },
