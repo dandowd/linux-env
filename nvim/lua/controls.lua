@@ -48,6 +48,7 @@ reg({
       i = { "<cmd>lua require'dap'.step_into()<CR>", "Step into" },
       l = { "<cmd>lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<CR>", "Log Point" },
       s = { "<cmd>lua require('dap.ui.widgets').centered_float(require('dap.ui.widgets').scopes)<CR>", "Scopes" },
+      m = { "<cmd>lua require'dap'.run_to_cursor()<CR>", "Run to mouse" },
     },
     x = {
       name = "+terminal",

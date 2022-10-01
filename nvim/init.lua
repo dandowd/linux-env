@@ -1,5 +1,7 @@
 require "settings"
 require "plugins"
+require "treesitter-config"
+require "plugin-configs"
 require "controls"
 require "cmp-config"
 require "lsp"

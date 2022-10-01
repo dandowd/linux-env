@@ -21,6 +21,12 @@ for _, language in ipairs({ "typescript", "javascript" }) do
       name = "Attach",
       processId = require 'dap.utils'.pick_process,
       cwd = "${workspaceFolder}",
+    },
+    {
+      type = "node-terminal",
+      request = "launch",
+      name = "Launch terminal",
+      cwd = "${workspaceFolder}",
     }
   }
 end

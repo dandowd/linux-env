@@ -26,16 +26,11 @@ packer.init {
 return require("packer").startup(function(use)
   -- Packer can managez itself
   use "wbthomason/packer.nvim"
+  use "goolord/alpha-nvim"
   use "EdenEast/nightfox.nvim"
   use "sainnhe/everforest"
   use "mfussenegger/nvim-dap"
-  use { "nvim-treesitter/nvim-treesitter",
-    config = function()
-      require("nvim-treesitter.configs").setup({
-        ensure_installed = { "typescript", "javascript", "lua" }
-      })
-    end
-  }
+  use { "nvim-treesitter/nvim-treesitter" }
   use {
     "folke/which-key.nvim",
     config = function() require("which-key").setup() end
