@@ -19,5 +19,4 @@ vim.cmd [[ set signcolumn=yes ]]
 vim.cmd [[ set clipboard=unnamedplus ]]
 vim.cmd [[ set foldmethod=syntax ]]
 vim.cmd [[ set foldlevelstart=20 ]]
-
 vim.cmd [[ colorscheme everforest ]]

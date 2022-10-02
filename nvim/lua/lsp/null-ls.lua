@@ -4,7 +4,7 @@ if not null_ls_status_ok then
 end
 
 vim.diagnostic.config({
-  virtual_text = true,
+  virtual_text = false,
   signs = true,
   underline = true,
   update_in_insert = false,

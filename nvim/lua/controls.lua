@@ -34,11 +34,14 @@ end
 
 map("n", "<S-h>", "<cmd>bprevious<CR>", opts)
 map("n", "<S-l>", "<cmd>bnext<CR>", opts)
+map("v", "<leader>/", "<cmd>\'<,\'>CommentToggle<CR>", opts)
 
 reg({
   ["<leader>"] = {
+    ["/"] = { "<cmd>CommentToggle<CR>", "Toggle Comment" },
+    q = { "<cmd>confirm qa<CR>", "Quit NeoVim" },
     c = { "<cmd>confirm bd<CR>", "Close Buffer" },
-    q = { "<cmd>confirm qa<CR>", "Quit" },
+    w = { "<cmd>confirm q<CR>", "Quit Window" },
     b = {
       name = "+bugger",
       t = { "<cmd>lua require'dap'.toggle_breakpoint()<CR>", "Toggle Breakpoint" },
@@ -50,6 +53,7 @@ reg({
       l = { "<cmd>lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<CR>", "Log Point" },
       s = { "<cmd>lua require('dap.ui.widgets').centered_float(require('dap.ui.widgets').scopes)<CR>", "Scopes" },
       m = { "<cmd>lua require'dap'.run_to_cursor()<CR>", "Run to mouse" },
+      u = { "<cmd>lua require'dapui'.toggle()<CR>", "UI" }
     },
     x = {
       name = "+terminal",

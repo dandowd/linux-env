@@ -27,10 +27,11 @@ return require("packer").startup(function(use)
   -- Packer can managez itself
   use "wbthomason/packer.nvim"
   use "goolord/alpha-nvim"
-  use "EdenEast/nightfox.nvim"
   use "sainnhe/everforest"
+  use "~/.config/nvim/lua/theme"
   use "mfussenegger/nvim-dap"
   use { "nvim-treesitter/nvim-treesitter" }
+  use "nvim-treesitter/playground"
   use {
     "folke/which-key.nvim",
     config = function() require("which-key").setup() end
@@ -108,13 +109,7 @@ return require("packer").startup(function(use)
     end
   }
   use {
-    "akinsho/toggleterm.nvim",
-    config = function() require("toggleterm").setup {
-        direction = "float",
-        hidden = "true",
-        open_mapping = [[<c-t>]]
-      }
-    end
+    "akinsho/toggleterm.nvim"
   }
   use {
     "nvim-neotest/neotest",
@@ -123,13 +118,8 @@ return require("packer").startup(function(use)
       "nvim-treesitter/nvim-treesitter",
       "antoinemadec/FixCursorHold.nvim",
       "haydenmeade/neotest-jest"
-    },
-    config = function()
-      require("neotest").setup({
-        adapters = {
-          require("neotest-jest")
-        }
-      })
-    end
+    }
   }
+  use "terrortylor/nvim-comment"
+  use "rktjmp/lush.nvim"
 end)
