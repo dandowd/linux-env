@@ -20,6 +20,7 @@ null_ls.setup {
   debug = false,
   sources = {
     formatting.prettier,
+    formatting.eslint,
     diagnostics.eslint,
     code_actions.eslint
   },
