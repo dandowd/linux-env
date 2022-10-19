@@ -32,6 +32,7 @@ return require("packer").startup(function(use)
   use "mfussenegger/nvim-dap"
   use { "nvim-treesitter/nvim-treesitter" }
   use "nvim-treesitter/playground"
+  use "gpanders/editorconfig.nvim"
   use {
     "folke/which-key.nvim",
     config = function() require("which-key").setup() end
