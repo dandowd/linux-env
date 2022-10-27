@@ -15,8 +15,10 @@ g.loaded_netrwPlugin = 1
 opt.termguicolors = true
 
 vim.cmd [[ set mouse=a ]]
+vim.cmd [[ set hidden ]]
 vim.cmd [[ set signcolumn=yes ]]
 vim.cmd [[ set clipboard=unnamedplus ]]
 vim.cmd [[ set foldmethod=syntax ]]
 vim.cmd [[ set foldlevelstart=20 ]]
 vim.cmd [[ colorscheme everforest ]]
+

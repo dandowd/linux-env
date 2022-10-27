@@ -5,23 +5,26 @@ local map = vim.api.nvim_set_keymap
 local opts = { noremap = true, silent = true }
 
 local Terminal = require('toggleterm.terminal').Terminal
-local lazygit  = Terminal:new({
+local lazygit = Terminal:new({
   cmd = "lazygit",
-  hidden = true,
+  dir = "git_dir",
   direction = "float",
-  dir = "git_dir"
+  float_opts = {
+    border = "double",
+  },
+  -- function to run on opening the terminal
+  on_open = function(term)
+    vim.cmd("startinsert!")
+    vim.api.nvim_buf_set_keymap(term.bufnr, "n", "q", "<cmd>close<CR>", {noremap = true, silent = true})
+  end,
+  -- function to run on closing the terminal
+  on_close = function(term)
+    vim.cmd("startinsert!")
+  end,
 })
 
 function _lazygit_toggle()
   lazygit:toggle()
-end
-
-function _open_tabbed_term()
-  Terminal:new({
-    hidden = true,
-    direction = "tab",
-    dir = "git_dir"
-  }):open()
 end
 
 function _open_horizontal_term()
@@ -34,11 +37,10 @@ end
 
 map("n", "<S-h>", "<cmd>bprevious<CR>", opts)
 map("n", "<S-l>", "<cmd>bnext<CR>", opts)
-map("v", "<leader>/", "<cmd>\'<,\'>CommentToggle<CR>", opts)
+map("v", "<leader>/", "<cmd>'<,'>CommentToggle<CR>", opts)
 
 reg({
   ["<leader>"] = {
-    ["/"] = { "<cmd>CommentToggle<CR>", "Toggle Comment" },
     q = { "<cmd>confirm qa<CR>", "Quit NeoVim" },
     c = { "<cmd>confirm bd<CR>", "Close Buffer" },
     w = { "<cmd>confirm q<CR>", "Quit Window" },
@@ -58,7 +60,6 @@ reg({
     x = {
       name = "+terminal",
       f = { "<cmd>ToggleTerm<CR>", "Floating" },
-      t = { "<cmd>lua _open_tabbed_term()<CR>", "Tabbed" },
       h = { "<cmd>lua _open_horizontal_term()<CR>", "Horizontal" }
     },
     g = { "<cmd>lua _lazygit_toggle()<CR>", "Git" },
@@ -90,8 +91,8 @@ reg({
     h = { "<cmd>noh<cr>", "No Highlight" },
     d = {
       name = "+diagnostics",
-      d = { "<cmd>TroubleToggle document_diagnostics<cr>", "Diagnostics" },
-      w = { "<cmd>TroubleToggle workspace_diagnostics<cr>", "Workspace Diagnostics" },
+      d = { "<cmd>lua require'telescope.builtin'.diagnostics{bufnr=0}<cr>", "Diagnostics" },
+      w = { "<cmd>lua require'telescope.builtin'.diagnostics{}<cr>", "Workspace Diagnostics" },
       l = { "<cmd>lua vim.diagnostic.open_float()<CR>", "Line Diagnostics" }
     },
     p = { "<cmd>lua require'telescope'.extensions.project.project{ display_type = 'full' }<CR>", "Projects" }

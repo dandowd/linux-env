@@ -28,7 +28,6 @@ return require("packer").startup(function(use)
   use "wbthomason/packer.nvim"
   use "goolord/alpha-nvim"
   use "sainnhe/everforest"
-  use "~/.config/nvim/lua/theme"
   use "mfussenegger/nvim-dap"
   use { "nvim-treesitter/nvim-treesitter" }
   use "nvim-treesitter/playground"
@@ -79,17 +78,6 @@ return require("packer").startup(function(use)
 
   use "jose-elias-alvarez/null-ls.nvim"
   use {
-    "folke/trouble.nvim",
-    requires = "kyazdani42/nvim-web-devicons",
-    config = function()
-      require("trouble").setup {
-        -- your configuration comes here
-        -- or leave it empty to use the default settings
-        -- refer to the configuration section below
-      }
-    end
-  }
-  use {
     "akinsho/bufferline.nvim",
     config = function()
       require("bufferline").setup()
@@ -123,5 +111,4 @@ return require("packer").startup(function(use)
     }
   }
   use "terrortylor/nvim-comment"
-  use "rktjmp/lush.nvim"
 end)
