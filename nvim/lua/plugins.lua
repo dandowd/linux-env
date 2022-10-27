@@ -37,10 +37,14 @@ return require("packer").startup(function(use)
     config = function() require("which-key").setup() end
   }
   use { "nvim-telescope/telescope-project.nvim" }
+  use { "nvim-telescope/telescope-dap.nvim" }
   use {
     "nvim-telescope/telescope.nvim", tag = "0.1.0",
     requires = { { "nvim-lua/plenary.nvim" } },
-    config = function() require "telescope".load_extension("project") end
+    config = function()
+      require "telescope".load_extension("project")
+      require('telescope').load_extension('dap')
+    end
   }
   use {
     "nvim-lualine/lualine.nvim",
