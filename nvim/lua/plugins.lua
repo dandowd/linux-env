@@ -43,7 +43,7 @@ return require("packer").startup(function(use)
     requires = { { "nvim-lua/plenary.nvim" } },
     config = function()
       require "telescope".load_extension("project")
-      require('telescope').load_extension('dap')
+      require("telescope").load_extension("dap")
     end
   }
   use {
@@ -115,4 +115,12 @@ return require("packer").startup(function(use)
     }
   }
   use "terrortylor/nvim-comment"
+  use {
+    "pwntester/octo.nvim",
+    requires = {
+      "nvim-lua/plenary.nvim",
+      "nvim-telescope/telescope.nvim",
+      "kyazdani42/nvim-web-devicons"
+    }
+  }
 end)

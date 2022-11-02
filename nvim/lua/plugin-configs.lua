@@ -1,6 +1,6 @@
-require 'alpha'.setup(require 'welcome'.config)
-require 'nvim_comment'.setup()
-require 'neotest'.setup({
+require("alpha").setup(require("welcome").config)
+require("nvim_comment").setup()
+require("neotest").setup({
   adapters = {
     require("neotest-jest")
   }
@@ -10,3 +10,4 @@ require("toggleterm").setup {
   hidden = "true",
   open_mapping = [[<c-t>]]
 }
+require("octo").setup()
