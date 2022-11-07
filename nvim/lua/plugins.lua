@@ -27,6 +27,7 @@ return require("packer").startup(function(use)
   -- Packer can managez itself
   use "wbthomason/packer.nvim"
   use "goolord/alpha-nvim"
+  use "EdenEast/nightfox.nvim"
   use "sainnhe/everforest"
   use "mfussenegger/nvim-dap"
   use { "nvim-treesitter/nvim-treesitter" }
@@ -55,14 +56,7 @@ return require("packer").startup(function(use)
     "kyazdani42/nvim-tree.lua",
     requires = {
       "kyazdani42/nvim-web-devicons", -- optional, for file icons
-    },
-    config = function()
-      require("nvim-tree").setup({
-        view = {
-          adaptive_size = true
-        }
-      })
-    end,
+    }
   }
   use {
     "williamboman/mason.nvim",
@@ -123,4 +117,8 @@ return require("packer").startup(function(use)
       "kyazdani42/nvim-web-devicons"
     }
   }
+
+  use "jayp0521/mason-null-ls.nvim"
+
+  use "sitiom/nvim-numbertoggle"
 end)

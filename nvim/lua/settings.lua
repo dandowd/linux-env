@@ -11,7 +11,7 @@ o.number=true
 g.cursorhold_updatetime = 100
 g.loaded = 1
 g.loaded_netrwPlugin = 1
-
+g.loaded_netrw = 1
 opt.termguicolors = true
 
 vim.cmd [[ set mouse=a ]]

@@ -60,7 +60,7 @@ reg({
     x = {
       name = "+terminal",
       f = { "<cmd>ToggleTerm<CR>", "Floating" },
-      h = { "<cmd>lua _open_horizontal_term()<CR>", "Horizontal" }
+      w = { "<cmd>ter<CR>", "Window" }
     },
     g = { "<cmd>lua _lazygit_toggle()<CR>", "Git" },
     t = {

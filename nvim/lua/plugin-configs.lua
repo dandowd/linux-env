@@ -11,3 +11,9 @@ require("toggleterm").setup {
   open_mapping = [[<c-t>]]
 }
 require("octo").setup()
+
+require("nvim-tree").setup()
+
+require("numbertoggle").setup()
+
+require("mason-null-ls").setup()
