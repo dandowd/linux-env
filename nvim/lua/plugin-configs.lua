@@ -17,3 +17,4 @@ require("nvim-tree").setup()
 require("numbertoggle").setup()
 
 require("mason-null-ls").setup()
+require("nvim-autopairs").setup()
