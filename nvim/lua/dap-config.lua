@@ -30,3 +30,9 @@ for _, language in ipairs({ "typescript", "javascript" }) do
     }
   }
 end
+
+dap.adapters.lldb = {
+  type = "executable",
+  command = "/usr/bin/lldb-vscode", -- adjust as needed
+  name = "lldb",
+}
