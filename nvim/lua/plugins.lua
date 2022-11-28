@@ -121,5 +121,6 @@ return require("packer").startup(function(use)
 
   use "jayp0521/mason-null-ls.nvim"
 
+  use "APZelos/blamer.nvim"
   use "sitiom/nvim-numbertoggle"
 end)

@@ -13,6 +13,7 @@ local M = {
         "!FindInMap",
         "!If",
         "!Equals",
+        "!ImportValue"
       },
       schemas = require("schemastore").json.schemas()
     }
