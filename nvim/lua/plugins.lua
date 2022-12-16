@@ -26,6 +26,7 @@ packer.init {
 return require("packer").startup(function(use)
   -- Packer can managez itself
   use "wbthomason/packer.nvim"
+  use "lukas-reineke/indent-blankline.nvim"
   use "windwp/nvim-autopairs"
   use "goolord/alpha-nvim"
   use "EdenEast/nightfox.nvim"
