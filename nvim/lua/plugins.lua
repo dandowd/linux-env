@@ -31,6 +31,7 @@ return require("packer").startup(function(use)
   use "goolord/alpha-nvim"
   use "EdenEast/nightfox.nvim"
   use "sainnhe/everforest"
+  use 'famiu/bufdelete.nvim'
   use "mfussenegger/nvim-dap"
   use { "nvim-treesitter/nvim-treesitter" }
   use "nvim-treesitter/playground"
@@ -124,4 +125,13 @@ return require("packer").startup(function(use)
 
   use "APZelos/blamer.nvim"
   use "sitiom/nvim-numbertoggle"
+  use {
+    "nvim-neo-tree/neo-tree.nvim",
+    branch = "v2.x",
+    requires = {
+      "nvim-lua/plenary.nvim",
+      "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+      "MunifTanjim/nui.nvim",
+    }
+  }
 end)

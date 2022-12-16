@@ -42,7 +42,7 @@ map("v", "<leader>/", "<cmd>'<,'>CommentToggle<CR>", opts)
 reg({
   ["<leader>"] = {
     q = { "<cmd>confirm qa<CR>", "Quit NeoVim" },
-    c = { "<cmd>confirm bd<CR>", "Close Buffer" },
+    c = { "<cmd>confirm Bdelete<CR>", "Close Buffer" },
     w = { "<cmd>confirm q<CR>", "Quit Window" },
     b = {
       name = "+bugger",
@@ -87,7 +87,7 @@ reg({
       r = { "<cmd>Telescope registers<CR>", "Registers" },
       m = { "<cmd>Telescope marks<CR>", "Marks" }
     },
-    e = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
+    e = { "<cmd>NeoTreeFloatToggle<cr>", "Explorer" },
     h = { "<cmd>noh<cr>", "No Highlight" },
     d = {
       name = "+diagnostics",
