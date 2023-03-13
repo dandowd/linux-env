@@ -16,17 +16,17 @@ alias python=/usr/bin/python3
 export FZF_DEFAULT_COMMAND='fd --color always --type file --strip-cwd-prefix --hidden --follow -E .git -E node_modules'
 alias ff="fzf --print0 --ansi | xargs -0 -o nvim"
 
+
 function directory_find() {
-  if [ $# -eq 0 ] 
-    then
-      cd $(fd --color always --type directory -E node_modules | fzf --ansi)
-    else
-      cd $(fd --color always --type directory -E node_modules $@ | fzf --ansi)
+  dirs=$(fd --color always --type directory -E node_modules $@ | fzf --ansi)
+  if [ $? -eq 0 ]
+  then
+    cd "$dirs"
   fi
 }
 alias df=directory_find
 
+
 alias zshrc="nvim ~/.zshrc"
 
-alias lua-init="nvim ~/.config/nvim/lua/user/"
 alias projects="cd ~/Projects"
