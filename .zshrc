@@ -14,7 +14,7 @@ bindkey -v
 alias python=/usr/bin/python3
 
 export FZF_DEFAULT_COMMAND='fd --color always --type file --strip-cwd-prefix --hidden --follow -E .git -E node_modules'
-alias ff="fzf --print0 --ansi | xargs -0 -o nvim"
+alias ff="fzf --print0 --ansi | xargs -0 -o nvim -c 'cd %:h'"
 
 
 function directory_find() {
