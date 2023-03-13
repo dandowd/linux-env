@@ -39,4 +39,7 @@ alias projects="cd ~/Projects"
 
 alias lg="lazygit"
 
-alias rgf="rg -l -e v1/customers/subscription | fzf --preview 'bat --style=numbers --color=always --line-range :500 {}'"
+function rip_grep_find() {
+	rg -l $@ | fzf --print0 --ansi --preview 'bat --style=numbers --color=always --line-range :500 {}' | xargs -0 -o nvim
+}
+alias rgf=rip_grep_find
