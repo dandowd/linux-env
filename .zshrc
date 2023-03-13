@@ -2,9 +2,15 @@ fpath+=("$(brew --prefix)/share/zsh/site-functions")
 autoload -U promptinit; promptinit
 prompt pure
 
+if [ -f ~/Projects/hellotill-platform/hellotill-platform.sh ]; then
+  . ~/Projects/hellotill-platform/hellotill-platform.sh
+fi
+
 export NVM_DIR="$HOME/.nvm"
 [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
 [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+
+export PATH="/Users/daniel.dowd/.nvm/versions/node/v16.19.0/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/daniel.dowd/Library/Python/3.9/bin"
 
 alias ls=exa
 
@@ -30,3 +36,7 @@ alias df=directory_find
 alias zshrc="nvim ~/.zshrc"
 
 alias projects="cd ~/Projects"
+
+alias lg="lazygit"
+
+alias rgf="rg -l -e v1/customers/subscription | fzf --preview 'bat --style=numbers --color=always --line-range :500 {}'"
