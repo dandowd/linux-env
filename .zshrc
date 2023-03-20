@@ -1,4 +1,5 @@
 fpath+=("$(brew --prefix)/share/zsh/site-functions")
+path+=("/usr/local/netcoredbg/")
 autoload -U promptinit; promptinit
 prompt pure
 
@@ -10,7 +11,7 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
 [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 
-export PATH="/Users/daniel.dowd/.nvm/versions/node/v16.19.0/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/daniel.dowd/Library/Python/3.9/bin"
+export PATH="$PATH:$HOME/.nvm/versions/node/v16.19.0/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:$HOME/Library/Python/3.9/bin:$HOME/.cargo/bin/"
 
 alias ls=exa
 
@@ -20,8 +21,16 @@ bindkey -v
 alias python=/usr/bin/python3
 
 export FZF_DEFAULT_COMMAND='fd --color always --type file --strip-cwd-prefix --hidden --follow -E .git -E node_modules'
-alias ff="fzf --print0 --ansi | xargs -0 -o nvim -c 'cd %:h'"
 
+function find_file() {
+  relative_file_loc=$(fzf --print0 --ansi)
+
+  file_name=$(basename "$relative_file_loc")
+  dir_name=$(dirname "$relative_file_loc")
+
+  cd $dir_name && nvim $file_name
+}
+alias ff=find_file
 
 function directory_find() {
   dirs=$(fd --color always --type directory -E node_modules $@ | fzf --ansi)
