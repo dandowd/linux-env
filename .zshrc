@@ -40,6 +40,7 @@ function directory_find() {
   fi
 }
 alias df=directory_find
+alias gitd='cd $(git rev-parse --show-toplevel)'
 
 
 alias zshrc="nvim ~/.zshrc"
