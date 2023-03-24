@@ -23,7 +23,7 @@ alias python=/usr/bin/python3
 export FZF_DEFAULT_COMMAND='fd --color always --type file --strip-cwd-prefix --hidden --follow -E .git -E node_modules'
 
 function find_file() {
-  relative_file_loc=$(fzf --print0 --ansi)
+  relative_file_loc=$(fzf --print0 --ansi --preview 'bat --style=numbers --color=always --line-range :500 {}')
 
   file_name=$(basename "$relative_file_loc")
   dir_name=$(dirname "$relative_file_loc")
@@ -45,7 +45,16 @@ alias gitd='cd $(git rev-parse --show-toplevel)'
 
 alias zshrc="nvim ~/.zshrc"
 
-alias projects="cd ~/Projects"
+function projects() {
+  dir=$1
+  
+  if [ -z "$dir" ]
+  then
+    cd ~/Projects
+  else
+    cd ~/Projects/$dir
+  fi
+}
 
 alias lg="lazygit"
 
