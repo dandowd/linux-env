@@ -1,8 +1,0 @@
-require "plugins"
-require "plugin-configs"
-require "treesitter-config"
-require "cmp-config"
-require "lsp"
-require "dap-config"
-require "controls"
-require "settings"
