@@ -12,11 +12,9 @@ export FZF_DEFAULT_COMMAND='fd --color always --type file --strip-cwd-prefix --h
 
 function find_file() {
   relative_file_loc=$(fzf --print0 --ansi --preview 'bat --style=numbers --color=always --line-range :500 {}')
-
-  if [ "$relative_file_loc" = " " ]
-  then
-    nvim $relative_file_loc
-  fi
+  
+  echo $relative_file_loc
+  nvim $relative_file_loc
 }
 alias ff=find_file
 
@@ -55,3 +53,5 @@ alias rgf=rip_grep_find
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+
+alias njs="nvim -u ~/.config/nvim/js.lua"
