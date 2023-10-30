@@ -6,6 +6,8 @@ prompt pure
 export AWS_SDK_LOAD_CONFIG=1
 
 bindkey -v
+bindkey '^R' history-incremental-search-backward
+
 alias python=/usr/bin/python3
 
 export FZF_DEFAULT_COMMAND='fd --color always --type file --strip-cwd-prefix --hidden --follow -E .git -E node_modules'
@@ -49,9 +51,8 @@ function rip_grep_find() {
 }
 
 alias rgf=rip_grep_find
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+alias njs="nvim -u ~/.config/nvim/js.lua"
 
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-
-alias njs="nvim -u ~/.config/nvim/js.lua"
+[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
