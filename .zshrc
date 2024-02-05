@@ -1,4 +1,5 @@
 fpath+=("$(brew --prefix)/share/zsh/site-functions")
+export PATH=$PATH:$(go env GOPATH)/bin
 
 autoload -U promptinit; promptinit
 prompt pure
@@ -6,9 +7,6 @@ prompt pure
 export AWS_SDK_LOAD_CONFIG=1
 
 bindkey -v
-bindkey '^R' history-incremental-search-backward
-
-alias python=/usr/bin/python3
 
 export FZF_DEFAULT_COMMAND='fd --color always --type file --strip-cwd-prefix --hidden --follow -E .git -E node_modules'
 
@@ -51,8 +49,17 @@ function rip_grep_find() {
 }
 
 alias rgf=rip_grep_find
-alias njs="nvim -u ~/.config/nvim/js.lua"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 export NVM_DIR="$HOME/.nvm"
-[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
-[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+
+alias njs="nvim -u ~/.config/nvim/js.lua"
+alias ngo="nvim -u ~/.config/nvim/go.lua"
+
+bindkey -v
+bindkey '^R' history-incremental-search-backward
+
+### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
+export PATH="/Users/danieldowd/.rd/bin:$PATH"
+### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
