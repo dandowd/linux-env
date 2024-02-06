@@ -28,6 +28,8 @@ function directory_find() {
 alias df=directory_find
 alias gitd='cd $(git rev-parse --show-toplevel)'
 
+export HUSKY = 0
+export EDITOR = nvim
 
 alias zshrc="nvim ~/.zshrc"
 
