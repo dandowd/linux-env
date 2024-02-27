@@ -40,7 +40,7 @@ require("lazy").setup({
 	"nvim-treesitter/nvim-treesitter",
 	"neovim/nvim-lspconfig",
 	"williamboman/mason-lspconfig.nvim",
-	"github/copilot.vim",
+	-- "github/copilot.vim",
 	"Hoffs/omnisharp-extended-lsp.nvim",
 	"williamboman/mason.nvim",
 	"mfussenegger/nvim-dap",
