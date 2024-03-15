@@ -1,6 +1,4 @@
 fpath+=("$(brew --prefix)/share/zsh/site-functions")
-export PATH=$PATH:$(go env GOPATH)/bin
-
 autoload -U promptinit; promptinit
 prompt pure
 
@@ -56,7 +54,6 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 
 alias njs="nvim -u ~/.config/nvim/js.lua"
-alias ngo="nvim -u ~/.config/nvim/go.lua"
 
 bindkey -v
 bindkey '^R' history-incremental-search-backward
