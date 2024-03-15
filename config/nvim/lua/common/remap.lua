@@ -60,6 +60,10 @@ vim.keymap.set('n', 'gd', vim.lsp.buf.definition)
 
 vim.keymap.set("n", "<leader>ld", "<cmd>lua vim.diagnostic.open_float()<CR>")
 
+-- Ollama
+vim.keymap.set("n", "<leader>oo", "<cmd>Ollama<CR>")
+
+
 -- Trouble
 vim.keymap.set("n", "<leader>x", "<cmd>TroubleToggle<CR>")
 
