@@ -13,12 +13,10 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-	{ "David-Kunz/gen.nvim", opts = { model = "dolphin-mistral" } },
 	'nvim-telescope/telescope-ui-select.nvim',
 	"nvim-lua/plenary.nvim",
 	"leoluz/nvim-dap-go",
 	{ "ellisonleao/gruvbox.nvim", priority = 1000 },
-	"nmac427/guess-indent.nvim",
 	"sbdchd/neoformat",
 	{
 		"goolord/alpha-nvim",
@@ -41,33 +39,46 @@ require("lazy").setup({
 	"neovim/nvim-lspconfig",
 	"williamboman/mason-lspconfig.nvim",
 	-- "github/copilot.vim",
-	"Hoffs/omnisharp-extended-lsp.nvim",
 	"williamboman/mason.nvim",
 	"mfussenegger/nvim-dap",
-	{ "akinsho/bufferline.nvim", tag = "v3.6.0", dependencies = "nvim-tree/nvim-web-devicons" },
+	{ "akinsho/bufferline.nvim", dependencies = "nvim-tree/nvim-web-devicons" },
 	"rcarriga/nvim-dap-ui",
-	"nvim-neotest/neotest-go",
-	"rouge8/neotest-rust",
 	{
 		"nvim-neotest/neotest",
 		dependencies = {
+			"nvim-neotest/nvim-nio",
 			"nvim-lua/plenary.nvim",
-			"nvim-treesitter/nvim-treesitter",
 			"antoinemadec/FixCursorHold.nvim",
-			"nvim-neotest/neotest-plenary",
-			"nvim-neotest/neotest-jest",
-			"Issafalcon/neotest-dotnet",
+			"nvim-treesitter/nvim-treesitter",
+			"nvim-neotest/neotest-jest"
 		},
+		config = function ()
+			require("neotest").setup({
+				adapters = {
+					require("neotest-jest"),
+				},
+				output = {
+					enable = false,
+					open_on_run = false,
+				},
+				quickfix = {
+					enable = false,
+					open = false,
+				},
+				output_panel = {
+					enable = false,
+					open = false,
+				},
+			})
+		end
 	},
 	"nvim-tree/nvim-web-devicons",
 	{ "nvim-telescope/telescope.nvim" },
 	"nvim-lualine/lualine.nvim",
 	"nvim-telescope/telescope-file-browser.nvim",
 	"windwp/nvim-autopairs",
-	{ "rose-pine/neovim", as = "rose-pine" },
 	{
 		"VonHeikemen/lsp-zero.nvim",
-		branch = "v1.x",
 		dependencies = {
 			-- LSP Support
 			{ "neovim/nvim-lspconfig" }, -- Required
@@ -82,26 +93,13 @@ require("lazy").setup({
 			{ "hrsh7th/cmp-nvim-lua" }, -- Optional
 
 			-- Snippets
-			{ "L3MON4D3/LuaSnip", commit = "0df29db3543837f8b41597f2640397c5ec792b7b" }, -- Required
+			{ "L3MON4D3/LuaSnip" }, -- Required
 		},
 	},
-	{
-		"nomnivore/ollama.nvim",
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-		},
-		-- All the user commands added by the plugin
-		cmd = { "Ollama", "OllamaModel", "OllamaServe", "OllamaServeStop" },
-		---@type Ollama.Config
-		opts = {
-			-- your configuration overrides
-			model = "codellama",
-		}
-	}
 })
 
-require("project_nvim").setup({})
-require("telescope").load_extension("projects")
+--require("project_nvim").setup({})
+--require("telescope").load_extension("projects")
 
 -- This must come before lsp config
 require("neoconf").setup({})
@@ -111,12 +109,6 @@ local lsp = require("lsp-zero").preset({
 	set_lsp_keymaps = true,
 	manage_nvim_cmp = true,
 	suggest_lsp_servers = false,
-})
-
-lsp.configure("omnisharp", {
-	handlers = {
-		["textDocument/definition"] = require("omnisharp_extended").handler,
-	},
 })
 
 require("luasnip.loaders.from_vscode").lazy_load()
@@ -165,9 +157,6 @@ require("lspconfig").jsonls.setup({
 lsp.setup()
 
 require("lualine").setup()
-require("rose-pine").setup({
-	disable_background = true,
-})
 require("trouble").setup()
 
 require("telescope").load_extension("file_browser")
@@ -185,5 +174,3 @@ require("bufferline").setup({
 		sort_by = "directory",
 	},
 })
-
-require("guess-indent").setup({})
