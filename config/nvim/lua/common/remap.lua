@@ -29,9 +29,6 @@ vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 
-vim.keymap.set("n", "<leader>vpp", "<cmd>e ~/.dotfiles/nvim/.config/nvim/lua/theprimeagen/packer.lua<CR>")
-vim.keymap.set("n", "<leader>mr", "<cmd>CellularAutomaton make_it_rain<CR>")
-
 vim.keymap.set("n", "<leader>e", "<cmd>Explore<CR>")
 vim.keymap.set("n", "<leader>wd", "<cmd>cd %:h<CR>")
 
@@ -57,17 +54,14 @@ vim.keymap.set("n", "<leader>lr", "<cmd>lua vim.lsp.buf.rename()<CR>")
 vim.keymap.set("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>")
 vim.keymap.set('n', 'gD', vim.lsp.buf.declaration)
 vim.keymap.set('n', 'gd', vim.lsp.buf.definition)
+vim.keymap.set('n', 'gr', vim.lsp.buf.references)
+vim.keymap.set('n', 'gi', vim.lsp.buf.implementation)
 
 vim.keymap.set("n", "<leader>ld", "<cmd>lua vim.diagnostic.open_float()<CR>")
-
--- Ollama
-vim.keymap.set("n", "<leader>oo", "<cmd>Ollama<CR>")
 
 
 -- Trouble
 vim.keymap.set("n", "<leader>x", "<cmd>TroubleToggle<CR>")
-
-vim.g.copilot_no_tab_map = true
 
 -- Bufferline
 vim.keymap.set("n", "<S-L>", "<cmd>BufferLineCycleNext<CR>")
@@ -75,5 +69,3 @@ vim.keymap.set("n", "<S-H>", "<cmd>BufferLineCyclePrev<CR>")
 vim.keymap.set("n", "gb", "<cmd>BufferLinePick<CR>")
 
 vim.keymap.set("n", "<leader>bc", "<cmd>bde<CR>")
-
-vim.api.nvim_set_keymap("i", "<C-j>", 'copilot#Accept("<CR>")', { silent = true, expr = true })
