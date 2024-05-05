@@ -107,25 +107,41 @@ require("neoconf").setup({})
 local lsp = require("lsp-zero").preset({
 	name = "minimal",
 	set_lsp_keymaps = true,
-	manage_nvim_cmp = true,
 	suggest_lsp_servers = false,
 })
 
 require("luasnip.loaders.from_vscode").lazy_load()
 
-lsp.setup_nvim_cmp({
-	snippet = {
-		-- REQUIRED - you must specify a snippet engine
-		expand = function(args)
-			require("luasnip").lsp_expand(args.body) -- For `luasnip` users.
-		end,
-	},
-	sources = {
-		{ name = "nvim_lsp" },
-		{ name = "path" },
-		{ name = "buffer", keyword_length = 5 },
-		{ name = "luasnip" },
-	},
+local cmp = require("cmp")
+cmp.setup({
+  sources = {
+    {name = 'nvim_lsp'},
+  },
+  mapping = {
+    ['<Tab>'] = cmp.mapping.confirm({select = true}),
+    ['<C-e>'] = cmp.mapping.abort(),
+    ['<Up>'] = cmp.mapping.select_prev_item({behavior = 'select'}),
+    ['<Down>'] = cmp.mapping.select_next_item({behavior = 'select'}),
+    ['<C-p>'] = cmp.mapping(function()
+      if cmp.visible() then
+        cmp.select_prev_item({behavior = 'insert'})
+      else
+        cmp.complete()
+      end
+    end),
+    ['<C-n>'] = cmp.mapping(function()
+      if cmp.visible() then
+        cmp.select_next_item({behavior = 'insert'})
+      else
+        cmp.complete()
+      end
+    end),
+  },
+  snippet = {
+    expand = function(args)
+      require('luasnip').lsp_expand(args.body)
+    end,
+  },
 })
 
 -- (Optional) Configure lua language server for neovim
