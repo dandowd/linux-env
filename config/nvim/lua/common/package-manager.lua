@@ -144,9 +144,6 @@ cmp.setup({
   },
 })
 
--- (Optional) Configure lua language server for neovim
-lsp.nvim_workspace()
-
 require("mason").setup()
 require("mason-lspconfig").setup()
 
