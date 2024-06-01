@@ -119,6 +119,7 @@ cmp.setup({
   },
   mapping = {
     ['<CR>'] = cmp.mapping.confirm({select = true}),
+    ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
     ['<C-e>'] = cmp.mapping.abort(),
     ['<S-Tab>'] = cmp.mapping.select_prev_item({behavior = 'select'}),
     ['<Tab>'] = cmp.mapping.select_next_item({behavior = 'select'}),
