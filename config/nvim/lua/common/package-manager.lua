@@ -30,6 +30,15 @@ require("lazy").setup({
 		opt = true,
 		build = "npm install --legacy-peer-deps && npx gulp vsDebugServerBundle && mv dist out",
 	},
+  {
+    "nvim-neo-tree/neo-tree.nvim",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+      "MunifTanjim/nui.nvim",
+      -- "3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
+    }
+  },
 	{ "ahmedkhalf/project.nvim" },
 	{ "b0o/schemastore.nvim" },
 	{ "folke/neoconf.nvim", cmd = "Neoconf" },

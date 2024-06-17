@@ -34,6 +34,8 @@ vim.keymap.set("n", "<leader>wd", "<cmd>cd %:h<CR>")
 
 vim.keymap.set("n", "<leader>nf", "<cmd>Neoformat<CR>")
 
+vim.keymap.set("n", "<leader>t", "<cmd>Neotree toggle %<CR>")
+
 -- NeoTest
 vim.keymap.set("n", "<leader>jn", "<cmd>lua require('neotest').run.run()<CR>")
 vim.keymap.set("n", "<leader>js", "<cmd>lua require('neotest').run.stop()<CR>")
