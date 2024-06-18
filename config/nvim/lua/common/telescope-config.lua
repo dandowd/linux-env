@@ -1,7 +1,7 @@
 local builtin = require("telescope.builtin")
 local extensions = require("telescope").extensions
 
-vim.keymap.set("n", "<leader>ff", function() builtin.find_files({ hidden = true }) end, {})
+vim.keymap.set("n", "<leader>ff", function() builtin.find_files({ hidden = true, file_ignore_patterns = {"node_modules", ".git/"} }) end, {})
 vim.keymap.set("n", "<leader>fp", extensions.projects.projects, {})
 vim.keymap.set("n", "<leader>fg", builtin.live_grep, {})
 vim.keymap.set("n", "<leader>fr", builtin.registers, {})
@@ -20,7 +20,7 @@ vim.keymap.set("n", "<leader>vh", builtin.help_tags, {})
 vim.api.nvim_create_autocmd("VimEnter", {
   callback = function()
     if vim.fn.argv(0) == "" then
-      require("telescope.builtin").find_files()
+      require("telescope.builtin").find_files({ hidden = true, file_ignore_patterns = {"node_modules", ".git/"}})
     end
   end,
 })
