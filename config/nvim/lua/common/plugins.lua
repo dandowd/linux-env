@@ -1,5 +1,11 @@
 local lspconfig = require('lspconfig')
 
+lspconfig.terraformls.setup({
+  on_init = function(client)
+    client.server_capabilities.semanticTokensProvider = nil
+  end,
+})
+
 lspconfig.tsserver.setup{
   flags = {
     debounce_text_changes = 150,
