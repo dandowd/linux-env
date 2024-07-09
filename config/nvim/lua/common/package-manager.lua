@@ -127,6 +127,16 @@ cmp.setup({
     {name = 'nvim_lsp'},
     {name = 'buffer'}
   },
+  sorting = {
+		comparators = {
+			cmp.config.compare.offset,
+			cmp.config.compare.exact,
+			cmp.config.compare.score,
+			cmp.config.compare.recently_used,
+			--require("cmp-under-comparator").under,
+			cmp.config.compare.kind,
+		},
+	},
   mapping = {
     ['<CR>'] = cmp.mapping.confirm({select = true}),
     ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
