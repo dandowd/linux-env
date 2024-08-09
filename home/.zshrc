@@ -2,8 +2,6 @@ fpath+=("$(brew --prefix)/share/zsh/site-functions")
 autoload -U promptinit; promptinit
 prompt pure
 
-export AWS_SDK_LOAD_CONFIG=1
-
 bindkey -v
 
 export FZF_DEFAULT_COMMAND='fd --color always --type file --strip-cwd-prefix --hidden --follow -E .git -E node_modules'
