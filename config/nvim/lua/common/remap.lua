@@ -65,7 +65,7 @@ vim.keymap.set("n", "<leader>ld", "<cmd>lua vim.diagnostic.open_float()<CR>")
 
 
 -- Trouble
-vim.keymap.set("n", "<leader>x", "<cmd>TroubleToggle<CR>")
+vim.keymap.set("n", "<leader>x", "<cmd>Trouble diagnostics toggle<CR>")
 
 -- Bufferline
 vim.keymap.set("n", "<S-L>", "<cmd>BufferLineCycleNext<CR>")

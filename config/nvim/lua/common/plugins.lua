@@ -6,7 +6,7 @@ lspconfig.terraformls.setup({
   end,
 })
 
-lspconfig.tsserver.setup{
+lspconfig.ts_ls.setup{
   flags = {
     debounce_text_changes = 150,
   },
