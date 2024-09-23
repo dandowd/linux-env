@@ -13,16 +13,16 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-	'nvim-telescope/telescope-ui-select.nvim',
+	"nvim-telescope/telescope-ui-select.nvim",
 	"nvim-lua/plenary.nvim",
 	"leoluz/nvim-dap-go",
 	{ "ellisonleao/gruvbox.nvim", priority = 1000 },
 	"sbdchd/neoformat",
 	{
 		"goolord/alpha-nvim",
-    config = function ()
-        require'alpha'.setup(require'alpha.themes.dashboard'.config)
-    end
+		config = function()
+			require("alpha").setup(require("alpha.themes.dashboard").config)
+		end,
 	},
 	{
 		"microsoft/vscode-js-debug",
@@ -30,15 +30,15 @@ require("lazy").setup({
 		opt = true,
 		build = "npm install --legacy-peer-deps && npx gulp vsDebugServerBundle && mv dist out",
 	},
-  {
-    "nvim-neo-tree/neo-tree.nvim",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
-      "MunifTanjim/nui.nvim",
-      -- "3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
-    }
-  },
+	{
+		"nvim-neo-tree/neo-tree.nvim",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+			"MunifTanjim/nui.nvim",
+			-- "3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
+		},
+	},
 	{ "ahmedkhalf/project.nvim" },
 	{ "b0o/schemastore.nvim" },
 	{ "folke/neoconf.nvim", cmd = "Neoconf" },
@@ -59,9 +59,9 @@ require("lazy").setup({
 			"nvim-lua/plenary.nvim",
 			"antoinemadec/FixCursorHold.nvim",
 			"nvim-treesitter/nvim-treesitter",
-			"nvim-neotest/neotest-jest"
+			"nvim-neotest/neotest-jest",
 		},
-		config = function ()
+		config = function()
 			require("neotest").setup({
 				adapters = {
 					require("neotest-jest"),
@@ -79,7 +79,7 @@ require("lazy").setup({
 					open = false,
 				},
 			})
-		end
+		end,
 	},
 	"nvim-tree/nvim-web-devicons",
 	{ "nvim-telescope/telescope.nvim" },
@@ -105,53 +105,53 @@ require("lazy").setup({
 			{ "L3MON4D3/LuaSnip" }, -- Required
 		},
 	},
-  {
-  "yetone/avante.nvim",
-  event = "VeryLazy",
-  lazy = false,
-  version = false, -- set this if you want to always pull the latest change
-  opts = {
-    -- add any opts here
-    provider = "openai"
-  },
-  -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
-  build = "make",
-  -- build = "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false" -- for windows
-  dependencies = {
-    "nvim-treesitter/nvim-treesitter",
-    "stevearc/dressing.nvim",
-    "nvim-lua/plenary.nvim",
-    "MunifTanjim/nui.nvim",
-    --- The below dependencies are optional,
-    "nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
-    "zbirenbaum/copilot.lua", -- for providers='copilot'
-    {
-      -- support for image pasting
-      "HakonHarnes/img-clip.nvim",
-      event = "VeryLazy",
-      opts = {
-        -- recommended settings
-        default = {
-          embed_image_as_base64 = false,
-          prompt_for_file_name = false,
-          drag_and_drop = {
-            insert_mode = true,
-          },
-          -- required for Windows users
-          use_absolute_path = true,
-        },
-      },
-    },
-    {
-      -- Make sure to set this up properly if you have lazy=true
-      'MeanderingProgrammer/render-markdown.nvim',
-      opts = {
-        file_types = { "markdown", "Avante" },
-      },
-      ft = { "markdown", "Avante" },
-    },
-  },
-}
+	{
+		"yetone/avante.nvim",
+		event = "VeryLazy",
+		lazy = false,
+		version = false, -- set this if you want to always pull the latest change
+		opts = {
+			-- add any opts here
+			provider = "openai",
+		},
+		-- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
+		build = "make",
+		-- build = "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false" -- for windows
+		dependencies = {
+			"nvim-treesitter/nvim-treesitter",
+			"stevearc/dressing.nvim",
+			"nvim-lua/plenary.nvim",
+			"MunifTanjim/nui.nvim",
+			--- The below dependencies are optional,
+			"nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
+			"zbirenbaum/copilot.lua", -- for providers='copilot'
+			{
+				-- support for image pasting
+				"HakonHarnes/img-clip.nvim",
+				event = "VeryLazy",
+				opts = {
+					-- recommended settings
+					default = {
+						embed_image_as_base64 = false,
+						prompt_for_file_name = false,
+						drag_and_drop = {
+							insert_mode = true,
+						},
+						-- required for Windows users
+						use_absolute_path = true,
+					},
+				},
+			},
+			{
+				-- Make sure to set this up properly if you have lazy=true
+				"MeanderingProgrammer/render-markdown.nvim",
+				opts = {
+					file_types = { "markdown", "Avante" },
+				},
+				ft = { "markdown", "Avante" },
+			},
+		},
+	},
 })
 
 --require("project_nvim").setup({})
@@ -170,11 +170,11 @@ require("luasnip.loaders.from_vscode").lazy_load()
 
 local cmp = require("cmp")
 cmp.setup({
-  sources = {
-    {name = 'nvim_lsp'},
-    {name = 'buffer'}
-  },
-  sorting = {
+	sources = {
+		{ name = "nvim_lsp" },
+		{ name = "buffer" },
+	},
+	sorting = {
 		comparators = {
 			cmp.config.compare.offset,
 			cmp.config.compare.exact,
@@ -184,32 +184,32 @@ cmp.setup({
 			cmp.config.compare.kind,
 		},
 	},
-  mapping = {
-    ['<CR>'] = cmp.mapping.confirm({select = true}),
-    ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
-    ['<C-e>'] = cmp.mapping.abort(),
-    ['<S-Tab>'] = cmp.mapping.select_prev_item({behavior = 'select'}),
-    ['<Tab>'] = cmp.mapping.select_next_item({behavior = 'select'}),
-    ['<C-p>'] = cmp.mapping(function()
-      if cmp.visible() then
-        cmp.select_prev_item({behavior = 'insert'})
-      else
-        cmp.complete()
-      end
-    end),
-    ['<C-n>'] = cmp.mapping(function()
-      if cmp.visible() then
-        cmp.select_next_item({behavior = 'insert'})
-      else
-        cmp.complete()
-      end
-    end),
-  },
-  snippet = {
-    expand = function(args)
-      require('luasnip').lsp_expand(args.body)
-    end,
-  },
+	mapping = {
+		["<CR>"] = cmp.mapping.confirm({ select = true }),
+		["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
+		["<C-e>"] = cmp.mapping.abort(),
+		["<S-Tab>"] = cmp.mapping.select_prev_item({ behavior = "select" }),
+		["<Tab>"] = cmp.mapping.select_next_item({ behavior = "select" }),
+		["<C-p>"] = cmp.mapping(function()
+			if cmp.visible() then
+				cmp.select_prev_item({ behavior = "insert" })
+			else
+				cmp.complete()
+			end
+		end),
+		["<C-n>"] = cmp.mapping(function()
+			if cmp.visible() then
+				cmp.select_next_item({ behavior = "insert" })
+			else
+				cmp.complete()
+			end
+		end),
+	},
+	snippet = {
+		expand = function(args)
+			require("luasnip").lsp_expand(args.body)
+		end,
+	},
 })
 
 require("mason").setup()
@@ -243,7 +243,6 @@ require("trouble").setup()
 require("telescope").load_extension("file_browser")
 require("telescope").load_extension("ui-select")
 require("nvim-autopairs").setup()
-
 
 require("bufferline").setup({
 	options = {
