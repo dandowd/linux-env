@@ -1,157 +1,197 @@
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
-	vim.fn.system({
-		"git",
-		"clone",
-		"--filter=blob:none",
-		"https://github.com/folke/lazy.nvim.git",
-		"--branch=stable", -- latest stable release
-		lazypath,
-	})
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
 end
 
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-	"nvim-telescope/telescope-ui-select.nvim",
-	"nvim-lua/plenary.nvim",
-	"leoluz/nvim-dap-go",
-	{ "ellisonleao/gruvbox.nvim", priority = 1000 },
-	"sbdchd/neoformat",
-	{
-		"goolord/alpha-nvim",
-		config = function()
-			require("alpha").setup(require("alpha.themes.dashboard").config)
-		end,
-	},
-	{
-		"microsoft/vscode-js-debug",
-		dependencies = "mxsdev/nvim-dap-vscode-js",
-		opt = true,
-		build = "npm install --legacy-peer-deps && npx gulp vsDebugServerBundle && mv dist out",
-	},
-	{
-		"nvim-neo-tree/neo-tree.nvim",
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-			"nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
-			"MunifTanjim/nui.nvim",
-			-- "3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
-		},
-	},
-	{ "ahmedkhalf/project.nvim" },
-	{ "b0o/schemastore.nvim" },
-	{ "folke/neoconf.nvim", cmd = "Neoconf" },
-	"folke/trouble.nvim",
-	"folke/neodev.nvim",
-	"nvim-treesitter/nvim-treesitter",
-	"neovim/nvim-lspconfig",
-	"williamboman/mason-lspconfig.nvim",
-	-- "github/copilot.vim",
-	"williamboman/mason.nvim",
-	"mfussenegger/nvim-dap",
-	{ "akinsho/bufferline.nvim", dependencies = "nvim-tree/nvim-web-devicons" },
-	"rcarriga/nvim-dap-ui",
-	{
-		"nvim-neotest/neotest",
-		dependencies = {
-			"nvim-neotest/nvim-nio",
-			"nvim-lua/plenary.nvim",
-			"antoinemadec/FixCursorHold.nvim",
-			"nvim-treesitter/nvim-treesitter",
-			"nvim-neotest/neotest-jest",
-		},
-		config = function()
-			require("neotest").setup({
-				adapters = {
-					require("neotest-jest"),
-				},
-				output = {
-					enable = false,
-					open_on_run = false,
-				},
-				quickfix = {
-					enable = false,
-					open = false,
-				},
-				output_panel = {
-					enable = false,
-					open = false,
-				},
-			})
-		end,
-	},
-	"nvim-tree/nvim-web-devicons",
-	{ "nvim-telescope/telescope.nvim" },
-	"nvim-lualine/lualine.nvim",
-	"nvim-telescope/telescope-file-browser.nvim",
-	"windwp/nvim-autopairs",
-	{
-		"VonHeikemen/lsp-zero.nvim",
-		dependencies = {
-			-- LSP Support
-			{ "neovim/nvim-lspconfig" }, -- Required
-			{ "williamboman/mason.nvim" }, -- Optional
-			{ "williamboman/mason-lspconfig.nvim" }, -- Optional
+  "nvim-telescope/telescope-ui-select.nvim",
+  "nvim-lua/plenary.nvim",
+  "leoluz/nvim-dap-go",
+  { "ellisonleao/gruvbox.nvim", priority = 1000 },
+  "sbdchd/neoformat",
+  {
+    "goolord/alpha-nvim",
+    config = function()
+      require("alpha").setup(require("alpha.themes.dashboard").config)
+    end,
+  },
+  {
+    "microsoft/vscode-js-debug",
+    dependencies = "mxsdev/nvim-dap-vscode-js",
+    opt = true,
+    build = "npm install --legacy-peer-deps && npx gulp vsDebugServerBundle && mv dist out",
+  },
+  {
+    "nvim-neo-tree/neo-tree.nvim",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+      "MunifTanjim/nui.nvim",
+      -- "3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
+    },
+  },
+  { "ahmedkhalf/project.nvim" },
+  { "b0o/schemastore.nvim" },
+  { "folke/neoconf.nvim",       cmd = "Neoconf" },
+  "folke/trouble.nvim",
+  "folke/neodev.nvim",
+  "nvim-treesitter/nvim-treesitter",
+  "neovim/nvim-lspconfig",
+  "williamboman/mason-lspconfig.nvim",
+  -- "github/copilot.vim",
+  "williamboman/mason.nvim",
+  "mfussenegger/nvim-dap",
+  { "akinsho/bufferline.nvim",      dependencies = "nvim-tree/nvim-web-devicons" },
+  "rcarriga/nvim-dap-ui",
+  {
+    "nvim-neotest/neotest",
+    dependencies = {
+      "nvim-neotest/nvim-nio",
+      "nvim-lua/plenary.nvim",
+      "antoinemadec/FixCursorHold.nvim",
+      "nvim-treesitter/nvim-treesitter",
+      "nvim-neotest/neotest-jest",
+    },
+    config = function()
+      require("neotest").setup({
+        adapters = {
+          require("neotest-jest"),
+        },
+        output = {
+          enable = false,
+          open_on_run = false,
+        },
+        quickfix = {
+          enable = false,
+          open = false,
+        },
+        output_panel = {
+          enable = false,
+          open = false,
+        },
+      })
+    end,
+  },
+  "nvim-tree/nvim-web-devicons",
+  { "nvim-telescope/telescope.nvim" },
+  "nvim-lualine/lualine.nvim",
+  "nvim-telescope/telescope-file-browser.nvim",
+  "windwp/nvim-autopairs",
+  {
+    "VonHeikemen/lsp-zero.nvim",
+    dependencies = {
+      -- LSP Support
+      { "neovim/nvim-lspconfig" },          -- Required
+      { "williamboman/mason.nvim" },        -- Optional
+      { "williamboman/mason-lspconfig.nvim" }, -- Optional
 
-			-- Autocompletion
-			{ "hrsh7th/nvim-cmp" }, -- Required
-			{ "hrsh7th/cmp-nvim-lsp" }, -- Required
-			{ "hrsh7th/cmp-buffer" }, -- Optional
-			{ "hrsh7th/cmp-path" }, -- Optional
-			{ "hrsh7th/cmp-nvim-lua" }, -- Optional
+      -- Autocompletion
+      { "hrsh7th/nvim-cmp" },  -- Required
+      { "hrsh7th/cmp-nvim-lsp" }, -- Required
+      { "hrsh7th/cmp-buffer" }, -- Optional
+      { "hrsh7th/cmp-path" },  -- Optional
+      { "hrsh7th/cmp-nvim-lua" }, -- Optional
 
-			-- Snippets
-			{ "L3MON4D3/LuaSnip" }, -- Required
-		},
-	},
-	{
-		"yetone/avante.nvim",
-		event = "VeryLazy",
-		lazy = false,
-		version = false, -- set this if you want to always pull the latest change
-		opts = {
-			-- add any opts here
-			provider = "openai",
-		},
-		-- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
-		build = "make",
-		-- build = "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false" -- for windows
-		dependencies = {
-			"nvim-treesitter/nvim-treesitter",
-			"stevearc/dressing.nvim",
-			"nvim-lua/plenary.nvim",
-			"MunifTanjim/nui.nvim",
-			--- The below dependencies are optional,
-			"nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
-			"zbirenbaum/copilot.lua", -- for providers='copilot'
-			{
-				-- support for image pasting
-				"HakonHarnes/img-clip.nvim",
-				event = "VeryLazy",
-				opts = {
-					-- recommended settings
-					default = {
-						embed_image_as_base64 = false,
-						prompt_for_file_name = false,
-						drag_and_drop = {
-							insert_mode = true,
-						},
-						-- required for Windows users
-						use_absolute_path = true,
-					},
-				},
-			},
-			{
-				-- Make sure to set this up properly if you have lazy=true
-				"MeanderingProgrammer/render-markdown.nvim",
-				opts = {
-					file_types = { "markdown", "Avante" },
-				},
-				ft = { "markdown", "Avante" },
-			},
-		},
-	},
+      -- Snippets
+      { "L3MON4D3/LuaSnip" }, -- Required
+    },
+  },
+  {
+    "yetone/avante.nvim",
+    event = "VeryLazy",
+    lazy = false,
+    version = false, -- set this if you want to always pull the latest change
+    opts = {
+      -- add any opts here
+      provider = "openai",
+      windows = {
+        ---@type "right" | "left" | "top" | "bottom"
+        position = "right", -- the position of the sidebar
+        wrap = true,    -- similar to vim.o.wrap
+        width = 40,     -- default % based on available width
+        sidebar_header = {
+          align = "center", -- left, center, right for title
+          rounded = true,
+        },
+      },
+      mappings = {
+        --- @class AvanteConflictMappings
+        diff = {
+          ours = "co",
+          theirs = "ct",
+          all_theirs = "ca",
+          both = "cb",
+          cursor = "cc",
+          next = "]x",
+          prev = "[x",
+        },
+        suggestion = {
+          accept = "<M-l>",
+          next = "<M-]>",
+          prev = "<M-[>",
+          dismiss = "<C-]>",
+        },
+        jump = {
+          next = "]]",
+          prev = "[[",
+        },
+        submit = {
+          normal = "<CR>",
+          insert = "<C-s>",
+        },
+        sidebar = {
+          switch_windows = "<Tab>",
+          reverse_switch_windows = "<S-Tab>",
+        },
+      },
+    },
+    -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
+    build = "make",
+    -- build = "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false" -- for windows
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+      "stevearc/dressing.nvim",
+      "nvim-lua/plenary.nvim",
+      "MunifTanjim/nui.nvim",
+      --- The below dependencies are optional,
+      "nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
+      "zbirenbaum/copilot.lua",   -- for providers='copilot'
+      {
+        -- support for image pasting
+        "HakonHarnes/img-clip.nvim",
+        event = "VeryLazy",
+        opts = {
+          -- recommended settings
+          default = {
+            embed_image_as_base64 = false,
+            prompt_for_file_name = false,
+            drag_and_drop = {
+              insert_mode = true,
+            },
+            -- required for Windows users
+            use_absolute_path = true,
+          },
+        },
+      },
+      {
+        -- Make sure to set this up properly if you have lazy=true
+        "MeanderingProgrammer/render-markdown.nvim",
+        opts = {
+          file_types = { "markdown", "Avante" },
+        },
+        ft = { "markdown", "Avante" },
+      },
+    },
+  },
 })
 
 --require("project_nvim").setup({})
@@ -161,78 +201,78 @@ require("lazy").setup({
 require("neoconf").setup({})
 
 local lsp = require("lsp-zero").preset({
-	name = "minimal",
-	set_lsp_keymaps = true,
-	suggest_lsp_servers = false,
+  name = "minimal",
+  set_lsp_keymaps = true,
+  suggest_lsp_servers = false,
 })
 
 require("luasnip.loaders.from_vscode").lazy_load()
 
 local cmp = require("cmp")
 cmp.setup({
-	sources = {
-		{ name = "nvim_lsp" },
-		{ name = "buffer" },
-	},
-	sorting = {
-		comparators = {
-			cmp.config.compare.offset,
-			cmp.config.compare.exact,
-			cmp.config.compare.score,
-			cmp.config.compare.recently_used,
-			--require("cmp-under-comparator").under,
-			cmp.config.compare.kind,
-		},
-	},
-	mapping = {
-		["<CR>"] = cmp.mapping.confirm({ select = true }),
-		["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
-		["<C-e>"] = cmp.mapping.abort(),
-		["<S-Tab>"] = cmp.mapping.select_prev_item({ behavior = "select" }),
-		["<Tab>"] = cmp.mapping.select_next_item({ behavior = "select" }),
-		["<C-p>"] = cmp.mapping(function()
-			if cmp.visible() then
-				cmp.select_prev_item({ behavior = "insert" })
-			else
-				cmp.complete()
-			end
-		end),
-		["<C-n>"] = cmp.mapping(function()
-			if cmp.visible() then
-				cmp.select_next_item({ behavior = "insert" })
-			else
-				cmp.complete()
-			end
-		end),
-	},
-	snippet = {
-		expand = function(args)
-			require("luasnip").lsp_expand(args.body)
-		end,
-	},
+  sources = {
+    { name = "nvim_lsp" },
+    { name = "buffer" },
+  },
+  sorting = {
+    comparators = {
+      cmp.config.compare.offset,
+      cmp.config.compare.exact,
+      cmp.config.compare.score,
+      cmp.config.compare.recently_used,
+      --require("cmp-under-comparator").under,
+      cmp.config.compare.kind,
+    },
+  },
+  mapping = {
+    ["<CR>"] = cmp.mapping.confirm({ select = true }),
+    ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
+    ["<C-e>"] = cmp.mapping.abort(),
+    ["<S-Tab>"] = cmp.mapping.select_prev_item({ behavior = "select" }),
+    ["<Tab>"] = cmp.mapping.select_next_item({ behavior = "select" }),
+    ["<C-p>"] = cmp.mapping(function()
+      if cmp.visible() then
+        cmp.select_prev_item({ behavior = "insert" })
+      else
+        cmp.complete()
+      end
+    end),
+    ["<C-n>"] = cmp.mapping(function()
+      if cmp.visible() then
+        cmp.select_next_item({ behavior = "insert" })
+      else
+        cmp.complete()
+      end
+    end),
+  },
+  snippet = {
+    expand = function(args)
+      require("luasnip").lsp_expand(args.body)
+    end,
+  },
 })
 
 require("mason").setup()
 require("mason-lspconfig").setup()
 
 require("mason-lspconfig").setup_handlers({
-	function(server_name) -- default handler (optional)
-		require("lspconfig")[server_name].setup({
-			capabilities = require("cmp_nvim_lsp").default_capabilities(),
-		})
-	end,
+  function(server_name) -- default handler (optional)
+    require("lspconfig")[server_name].setup({
+      capabilities = require("cmp_nvim_lsp").default_capabilities(),
+    })
+  end,
 })
 
 local json_capabilities = vim.lsp.protocol.make_client_capabilities()
 json_capabilities.textDocument.completion.completionItem.snippetSupport = true
 require("lspconfig").jsonls.setup({
-	capabilities = json_capabilities,
-	settings = {
-		json = {
-			schemas = require("schemastore").json.schemas(),
-			validate = { enable = true },
-		},
-	},
+  capabilities = json_capabilities,
+  settings = {
+    json = {
+      schemas = require("schemastore").json.schemas(),
+      validate = { enable = true },
+    },
+  },
 })
 
 lsp.setup()
@@ -245,12 +285,12 @@ require("telescope").load_extension("ui-select")
 require("nvim-autopairs").setup()
 
 require("bufferline").setup({
-	options = {
-		diagnostics = "nvim_lsp",
-		indicator = {
-			style = "underline",
-		},
-		separator_style = "padded_slant",
-		sort_by = "directory",
-	},
+  options = {
+    diagnostics = "nvim_lsp",
+    indicator = {
+      style = "underline",
+    },
+    separator_style = "padded_slant",
+    sort_by = "directory",
+  },
 })

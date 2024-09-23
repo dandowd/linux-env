@@ -73,3 +73,5 @@ vim.keymap.set("n", "<S-H>", "<cmd>BufferLineCyclePrev<CR>")
 vim.keymap.set("n", "gb", "<cmd>BufferLinePick<CR>")
 
 vim.keymap.set("n", "<leader>bc", "<cmd>bde<CR>")
+
+vim.keymap.set("n", "<leader>aa", "<cmd>lua require('avante').toggle()<CR>")
