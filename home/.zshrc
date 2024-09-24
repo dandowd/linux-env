@@ -139,3 +139,5 @@ function __zoxide_zi() {
 
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
+
+source ~/.config/.env_secrets
