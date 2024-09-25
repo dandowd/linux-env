@@ -18,6 +18,9 @@ vim.o.expandtab = true
 vim.o.shiftwidth = 2
 vim.o.tabstop = 2
 
+vim.o.smartcase = true
+vim.o.ignorecase = true
+
 vim.cmd([[ set termguicolors ]])
 vim.cmd([[ set background=dark ]])
 vim.cmd([[ colorscheme gruvbox ]])
