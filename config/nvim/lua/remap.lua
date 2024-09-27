@@ -74,4 +74,10 @@ vim.keymap.set("n", "gb", "<cmd>BufferLinePick<CR>")
 
 vim.keymap.set("n", "<leader>bc", "<cmd>bde<CR>")
 
-vim.keymap.set("n", "<leader>aa", "<cmd>lua require('avante').toggle()<CR>")
+vim.keymap.set("n", "<leader>aa", "<cmd>AvanteAsk<CR>")
+
+vim.keymap.set("v", "<leader>aa", "<cmd>AvanteAsk<CR>")
+vim.keymap.set("v", "<leader>ae", "<cmd>AvanteAsk<CR>")
+
+vim.keymap.set("v", "<leader>y", '"+y')
+vim.keymap.set("n", "<leader>y", '"+y')
