@@ -4,6 +4,7 @@ local extensions = require("telescope").extensions
 vim.keymap.set("n", "<leader>ff", function() builtin.find_files({ hidden = true, file_ignore_patterns = {"node_modules", ".git/"} }) end, {})
 vim.keymap.set("n", "<leader>fp", extensions.projects.projects, {})
 vim.keymap.set("n", "<leader>fg", builtin.live_grep, {})
+vim.keymap.set("n", "<leader>ft", builtin.buffers, {})
 vim.keymap.set("n", "<leader>fr", builtin.registers, {})
 vim.keymap.set("n", "<C-p>", builtin.git_files, {})
 vim.api.nvim_set_keymap(
