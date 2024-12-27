@@ -56,7 +56,6 @@ vim.keymap.set("n", "gd", vim.lsp.buf.definition)
 vim.keymap.set("n", "gr", vim.lsp.buf.references)
 vim.keymap.set("n", "gi", vim.lsp.buf.implementation)
 vim.keymap.set("n", "gk", vim.lsp.buf.signature_help)
-vim.keymap.set({ "n", "i" }, "C-k", vim.lsp.buf.signature_help)
 
 vim.keymap.set("n", "<leader>ld", "<cmd>lua vim.diagnostic.open_float()<CR>")
 
