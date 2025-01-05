@@ -76,3 +76,9 @@ vim.keymap.set("v", "<leader>ae", "<cmd>AvanteAsk<CR>")
 
 vim.keymap.set("v", "<leader>y", '"+y')
 vim.keymap.set("n", "<leader>y", '"+y')
+
+vim.keymap.set("i", "<C-J>", 'copilot#Accept("\\<CR>")', {
+	expr = true,
+	replace_keycodes = false,
+})
+vim.g.copilot_no_tab_map = true

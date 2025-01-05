@@ -39,6 +39,7 @@ require("lazy").setup({
 			-- "3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
 		},
 	},
+  { "github/copilot.vim" },
 	{ "ahmedkhalf/project.nvim" },
 	{ "b0o/schemastore.nvim" },
 	{ "folke/neoconf.nvim", cmd = "Neoconf" },
