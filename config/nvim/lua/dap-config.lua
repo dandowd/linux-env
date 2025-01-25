@@ -4,13 +4,13 @@ dap.configurations.logLevel = "error"
 
 dap.adapters.coreclr = {
 	type = "executable",
-	command = "/usr/local/netcoredbg/netcoredbg",
+	command = vim.fn.expand("~/.local/share/nvim/mason/packages/netcoredbg/netcoredbg"),
 	args = { "--interpreter=vscode" },
 }
 
 dap.adapters.netcoredbg = {
 	type = "executable",
-	command = "/usr/local/netcoredbg/netcoredbg",
+	command = vim.fn.expand("~/.local/share/nvim/mason/packages/netcoredbg/netcoredbg"),
 	args = { "--interpreter=vscode" },
 }
 
