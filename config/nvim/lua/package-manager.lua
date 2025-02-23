@@ -39,7 +39,6 @@ require("lazy").setup({
 			-- "3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
 		},
 	},
-	{ "github/copilot.vim" },
 	{ "ahmedkhalf/project.nvim" },
 	{ "b0o/schemastore.nvim" },
 	{ "folke/neoconf.nvim", cmd = "Neoconf" },
@@ -48,7 +47,6 @@ require("lazy").setup({
 	"nvim-treesitter/nvim-treesitter",
 	"neovim/nvim-lspconfig",
 	"williamboman/mason-lspconfig.nvim",
-	-- "github/copilot.vim",
 	"williamboman/mason.nvim",
 	"mfussenegger/nvim-dap",
 	{ "akinsho/bufferline.nvim", dependencies = "nvim-tree/nvim-web-devicons" },
