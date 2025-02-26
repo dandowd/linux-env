@@ -1,8 +1,27 @@
 local builtin = require("telescope.builtin")
 local extensions = require("telescope").extensions
 
+local find_command = {
+	"rg",
+	"--files",
+  "--glob",
+  "**/*",
+  "--glob",
+  ".env",
+  "--glob",
+  "!.git",
+  "--glob",
+  "!.venv",
+  "--glob",
+  "!node_modules",
+  "--glob",
+  "!__pycache__"
+}
+
 vim.keymap.set("n", "<leader>ff", function()
-	builtin.find_files({ hidden = true, file_ignore_patterns = { "node_modules", ".git/", "bin", "obj" } })
+	builtin.find_files({
+		find_command = find_command,
+	})
 end, {})
 vim.keymap.set("n", "<leader>fp", extensions.projects.projects, {})
 vim.keymap.set("n", "<leader>fg", builtin.live_grep, {})
@@ -23,7 +42,9 @@ vim.keymap.set("n", "<leader>vh", builtin.help_tags, {})
 vim.api.nvim_create_autocmd("VimEnter", {
 	callback = function()
 		if vim.fn.argv(0) == "" then
-			require("telescope.builtin").find_files({ hidden = true, file_ignore_patterns = { "node_modules", ".git/" } })
+			require("telescope.builtin").find_files({
+				find_command = find_command,
+			})
 		end
 	end,
 })
