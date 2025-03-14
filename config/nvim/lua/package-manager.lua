@@ -104,19 +104,6 @@ require("lazy").setup({
 			{ "L3MON4D3/LuaSnip" }, -- Required
 		},
 	},
-	{
-		"ray-x/lsp_signature.nvim",
-		event = "InsertEnter",
-		opts = {
-			bind = true,
-			handler_opts = {
-				border = "rounded",
-			},
-		},
-		config = function(_, opts)
-			require("lsp_signature").setup(opts)
-		end,
-	},
 })
 
 --require("project_nvim").setup({})
