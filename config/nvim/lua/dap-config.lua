@@ -45,6 +45,8 @@ dap.configurations.typescript = {
 		name = "Launch file",
 		program = "${file}",
 		cwd = "${workspaceFolder}",
+		outFiles = { "${workspaceFolder}/dist/**/*.js" },
+		sourceMaps = true,
 	},
 	{
 		type = "pwa-node",
