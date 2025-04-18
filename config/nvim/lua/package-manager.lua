@@ -26,9 +26,8 @@ require("lazy").setup({
 	},
 	{
 		"microsoft/vscode-js-debug",
-		dependencies = "mxsdev/nvim-dap-vscode-js",
 		opt = true,
-		build = "npm install --legacy-peer-deps && npx gulp vsDebugServerBundle && mv dist out",
+		build = "npm install --legacy-peer-deps && npx gulp dapDebugServer && mv dist out",
 	},
 	{
 		"nvim-neo-tree/neo-tree.nvim",
