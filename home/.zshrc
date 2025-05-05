@@ -2,6 +2,12 @@ fpath+=("$(brew --prefix)/share/zsh/site-functions")
 autoload -U promptinit; promptinit
 prompt pure
 
+function kube_prompt() {
+  echo '⎈ $(kubectl config current-context 2>/dev/null)'
+}
+
+RPROMPT="$(kube_prompt)"
+
 bindkey -v
 
 export FZF_DEFAULT_COMMAND='fd --color always --type file --strip-cwd-prefix --hidden --follow -E .git -E node_modules'
