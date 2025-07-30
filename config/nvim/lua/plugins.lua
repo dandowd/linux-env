@@ -1,43 +1,31 @@
-local lspconfig = require('lspconfig')
+local lspconfig = require("lspconfig")
 
 lspconfig.terraformls.setup({
-  on_init = function(client)
-    client.server_capabilities.semanticTokensProvider = nil
-  end,
+	on_init = function(client)
+		client.server_capabilities.semanticTokensProvider = nil
+	end,
 })
 
-lspconfig.ts_ls.setup{
-  flags = {
-    debounce_text_changes = 150,
+vim.lsp.config("ts_ls", {
+  cmd = { "typescript-language-server", "--stdio" },
+  filetypes = {
+    "javascript", "javascriptreact", "javascript.jsx",
+    "typescript", "typescriptreact", "typescript.tsx"
   },
-  root_dir = function(fname)
-    return lspconfig.util.root_pattern("package.json", "tsconfig.json", ".git")(fname) or vim.loop.os_homedir()
-  end,
+  root_markers = { "package.json", "tsconfig.json" },
+  init_options = {
+    hostInfo = "neovim"
+  },
   settings = {
-  -- Example settings
     typescript = {
-      exclude = { "node_modules" },
-      inlayHints = {
-        includeInlayParameterNameHints = "all",
-        includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-        includeInlayFunctionParameterTypeHints = true,
-        includeInlayVariableTypeHints = true,
-        includeInlayPropertyDeclarationTypeHints = true,
-        includeInlayFunctionLikeReturnTypeHints = true,
-        includeInlayEnumMemberValueHints = true,
-      },
+      inlayHints = { includeInlayParameterNameHints = "all" }
     },
     javascript = {
-      exclude = { "node_modules" },
-      inlayHints = {
-        includeInlayParameterNameHints = "all",
-        includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-        includeInlayFunctionParameterTypeHints = true,
-        includeInlayVariableTypeHints = true,
-        includeInlayPropertyDeclarationTypeHints = true,
-        includeInlayFunctionLikeReturnTypeHints = true,
-        includeInlayEnumMemberValueHints = true,
-      },
-    },
+      inlayHints = { includeInlayParameterNameHints = "all" }
+    }
   }
-}
+})
+
+vim.lsp.enable("ts_ls")
+vim.lsp.enable("lua_ls")
+vim.lsp.enable("jsonls")

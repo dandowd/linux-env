@@ -31,12 +31,13 @@ require("lazy").setup({
 	},
 	{
 		"nvim-neo-tree/neo-tree.nvim",
+		branch = "v3.x",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
-			"nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
 			"MunifTanjim/nui.nvim",
-			-- "3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
+			"nvim-tree/nvim-web-devicons", -- optional, but recommended
 		},
+		lazy = false, -- neo-tree will lazily load itself
 	},
 	{ "ahmedkhalf/project.nvim" },
 	{ "b0o/schemastore.nvim" },
@@ -44,7 +45,9 @@ require("lazy").setup({
 	"folke/trouble.nvim",
 	"folke/neodev.nvim",
 	"nvim-treesitter/nvim-treesitter",
-	"neovim/nvim-lspconfig",
+	{
+		"neovim/nvim-lspconfig",
+	},
 	"williamboman/mason-lspconfig.nvim",
 	"williamboman/mason.nvim",
 	"mfussenegger/nvim-dap",
@@ -84,23 +87,60 @@ require("lazy").setup({
 	"nvim-telescope/telescope-file-browser.nvim",
 	"windwp/nvim-autopairs",
 	{
-		"VonHeikemen/lsp-zero.nvim",
-		dependencies = {
-			-- LSP Support
-			{ "neovim/nvim-lspconfig" }, -- Required
-			{ "williamboman/mason.nvim" }, -- Optional
-			{ "williamboman/mason-lspconfig.nvim" }, -- Optional
+		"saghen/blink.cmp",
+		-- optional: provides snippets for the snippet source
+		dependencies = { "rafamadriz/friendly-snippets" },
 
-			-- Autocompletion
-			{ "hrsh7th/nvim-cmp" }, -- Required
-			{ "hrsh7th/cmp-nvim-lsp" }, -- Required
-			{ "hrsh7th/cmp-buffer" }, -- Optional
-			{ "hrsh7th/cmp-path" }, -- Optional
-			{ "hrsh7th/cmp-nvim-lua" }, -- Optional
+		-- use a release tag to download pre-built binaries
+		version = "1.*",
+		-- AND/OR build from source, requires nightly: https://rust-lang.github.io/rustup/concepts/channels.html#working-with-nightly-rust
+		-- build = 'cargo build --release',
+		-- If you use nix, you can build from source using latest nightly rust with:
+		-- build = 'nix run .#build-plugin',
 
-			-- Snippets
-			{ "L3MON4D3/LuaSnip" }, -- Required
+		opts = {
+			-- 'default' (recommended) for mappings similar to built-in completions (C-y to accept)
+			-- 'super-tab' for mappings similar to vscode (tab to accept)
+			-- 'enter' for enter to accept
+			-- 'none' for no mappings
+			--
+			-- All presets have the following mappings:
+			-- C-space: Open menu or open docs if already open
+			-- C-n/C-p or Up/Down: Select next/previous item
+			-- C-e: Hide menu
+			-- C-k: Toggle signature help (if signature.enabled = true)
+			--
+			-- See :h blink-cmp-config-keymap for defining your own keymap
+			keymap = {
+				preset = "default",
+				["<CR>"] = { "accept", "fallback" },
+				["<Tab>"] = { "select_next", "fallback" },
+				["<S-Tab>"] = { "select_prev", "fallback" },
+			},
+
+			appearance = {
+				-- 'mono' (default) for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
+				-- Adjusts spacing to ensure icons are aligned
+				nerd_font_variant = "mono",
+			},
+
+			-- (Default) Only show the documentation popup when manually triggered
+			completion = { documentation = { auto_show = false } },
+
+			-- Default list of enabled providers defined so that you can extend it
+			-- elsewhere in your config, without redefining it, due to `opts_extend`
+			sources = {
+				default = { "lsp", "path", "snippets", "buffer" },
+			},
+
+			-- (Default) Rust fuzzy matcher for typo resistance and significantly better performance
+			-- You may use a lua implementation instead by using `implementation = "lua"` or fallback to the lua implementation,
+			-- when the Rust fuzzy matcher is not available, by using `implementation = "prefer_rust"`
+			--
+			-- See the fuzzy documentation for more information
+			fuzzy = { implementation = "prefer_rust_with_warning" },
 		},
+		opts_extend = { "sources.default" },
 	},
 })
 
@@ -110,74 +150,8 @@ require("lazy").setup({
 -- This must come before lsp config
 require("neoconf").setup({})
 
-local lsp = require("lsp-zero").preset({
-	name = "minimal",
-	set_lsp_keymaps = true,
-	suggest_lsp_servers = false,
-})
-
-require("luasnip.loaders.from_vscode").lazy_load()
-
-local cmp = require("cmp")
-cmp.setup({
-	sources = {
-		{ name = "nvim_lsp" },
-		{ name = "buffer" },
-	},
-	sorting = {
-		comparators = {
-			cmp.config.compare.offset,
-			cmp.config.compare.exact,
-			cmp.config.compare.score,
-			cmp.config.compare.recently_used,
-			--require("cmp-under-comparator").under,
-			cmp.config.compare.kind,
-		},
-	},
-	mapping = {
-		["<CR>"] = cmp.mapping.confirm({ select = true }),
-		["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
-		["<C-e>"] = cmp.mapping.abort(),
-		["<S-Tab>"] = cmp.mapping.select_prev_item({ behavior = "select" }),
-		["<Tab>"] = cmp.mapping.select_next_item({ behavior = "select" }),
-		["<C-p>"] = cmp.mapping(function()
-			if cmp.visible() then
-				cmp.select_prev_item({ behavior = "insert" })
-			else
-				cmp.complete()
-			end
-		end),
-		["<C-n>"] = cmp.mapping(function()
-			if cmp.visible() then
-				cmp.select_next_item({ behavior = "insert" })
-			else
-				cmp.complete()
-			end
-		end),
-	},
-	snippet = {
-		expand = function(args)
-			require("luasnip").lsp_expand(args.body)
-		end,
-	},
-})
-
 require("mason").setup()
 require("mason-lspconfig").setup()
-
-local json_capabilities = vim.lsp.protocol.make_client_capabilities()
-json_capabilities.textDocument.completion.completionItem.snippetSupport = true
-require("lspconfig").jsonls.setup({
-	capabilities = json_capabilities,
-	settings = {
-		json = {
-			schemas = require("schemastore").json.schemas(),
-			validate = { enable = true },
-		},
-	},
-})
-
-lsp.setup()
 
 require("lualine").setup()
 require("trouble").setup()

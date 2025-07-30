@@ -1,5 +1,6 @@
 local builtin = require("telescope.builtin")
 local extensions = require("telescope").extensions
+local actions = require("telescope.actions")
 
 local find_command = {
 	"rg",
@@ -49,4 +50,17 @@ vim.api.nvim_create_autocmd("VimEnter", {
 			})
 		end
 	end,
+})
+
+require("telescope").setup({
+  defaults = {
+    mappings = {
+      i = {
+        ["<C-d>"] = actions.delete_buffer, -- delete buffer in insert mode
+      },
+      n = {
+        ["<C-d>"] = actions.delete_buffer, -- delete buffer in normal mode
+      },
+    },
+  },
 })

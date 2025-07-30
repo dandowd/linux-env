@@ -50,7 +50,9 @@ vim.keymap.set("n", "<leader>du", "<cmd>lua require('dapui').toggle()<CR>")
 -- LSP
 vim.keymap.set("n", "<leader>la", "<cmd>lua vim.lsp.buf.code_action()<CR>")
 vim.keymap.set("n", "<leader>lr", "<cmd>lua vim.lsp.buf.rename()<CR>")
-vim.keymap.set("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>")
+vim.keymap.set("n", "K", vim.lsp.buf.hover)
+vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help)
+vim.keymap.set("i", "<C-k>", vim.lsp.buf.signature_help)
 vim.keymap.set("n", "gD", vim.lsp.buf.declaration)
 vim.keymap.set("n", "gd", vim.lsp.buf.definition)
 vim.keymap.set("n", "gr", vim.lsp.buf.references)
@@ -62,17 +64,8 @@ vim.keymap.set("n", "<leader>ld", "<cmd>lua vim.diagnostic.open_float()<CR>")
 -- Trouble
 vim.keymap.set("n", "<leader>x", "<cmd>Trouble diagnostics toggle<CR>")
 
--- Bufferline
-vim.keymap.set("n", "<S-L>", "<cmd>BufferLineCycleNext<CR>")
-vim.keymap.set("n", "<S-H>", "<cmd>BufferLineCyclePrev<CR>")
-vim.keymap.set("n", "gb", "<cmd>BufferLinePick<CR>")
 
 vim.keymap.set("n", "<leader>bc", "<cmd>bde<CR>")
-
-vim.keymap.set("n", "<leader>aa", "<cmd>AvanteAsk<CR>")
-
-vim.keymap.set("v", "<leader>aa", "<cmd>AvanteAsk<CR>")
-vim.keymap.set("v", "<leader>ae", "<cmd>AvanteAsk<CR>")
 
 vim.keymap.set("v", "<leader>y", '"+y')
 vim.keymap.set("n", "<leader>y", '"+y')
@@ -81,4 +74,9 @@ vim.keymap.set("i", "<C-J>", 'copilot#Accept("\\<CR>")', {
 	expr = true,
 	replace_keycodes = false,
 })
+
+vim.keymap.set("n", "<leader>l", function()
+  vim.o.relativenumber = not vim.o.relativenumber
+end, { desc = "Toggle relative line numbers" })
+
 vim.g.copilot_no_tab_map = true
