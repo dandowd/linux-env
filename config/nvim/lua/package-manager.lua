@@ -48,7 +48,6 @@ require("lazy").setup({
 	"williamboman/mason-lspconfig.nvim",
 	"williamboman/mason.nvim",
 	"mfussenegger/nvim-dap",
-	{ "akinsho/bufferline.nvim", dependencies = "nvim-tree/nvim-web-devicons" },
 	"rcarriga/nvim-dap-ui",
 	{
 		"nvim-neotest/neotest",
@@ -186,14 +185,3 @@ require("trouble").setup()
 require("telescope").load_extension("file_browser")
 require("telescope").load_extension("ui-select")
 require("nvim-autopairs").setup()
-
-require("bufferline").setup({
-	options = {
-		diagnostics = "nvim_lsp",
-		indicator = {
-			style = "underline",
-		},
-		separator_style = "padded_slant",
-		sort_by = "directory",
-	},
-})
