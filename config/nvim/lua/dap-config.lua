@@ -45,8 +45,6 @@ dap.configurations.typescript = {
 		name = "Launch file",
 		program = "${file}",
 		cwd = "${workspaceFolder}",
-		outFiles = { "${workspaceFolder}/dist/**/*.js" },
-		sourceMaps = true,
 	},
 	{
 		type = "pwa-node",
@@ -55,8 +53,6 @@ dap.configurations.typescript = {
 		processId = require("dap.utils").pick_process,
 		protocol = "inspector",
 		cwd = "${workspaceFolder}",
-		outFiles = { "${workspaceFolder}/dist/**/*.js" },
-		sourceMaps = true,
 	},
 }
 

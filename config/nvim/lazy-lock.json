@@ -8,14 +8,14 @@
   "gruvbox.nvim": { "branch": "main", "commit": "58a2cda2e953a99e2f87c12b7fb4602da4e0709c" },
   "lazy.nvim": { "branch": "main", "commit": "6c3bda4aca61a13a9c63f1c1d1b16b9d3be90d7a" },
   "lualine.nvim": { "branch": "master", "commit": "a94fc68960665e54408fe37dcf573193c4ce82c9" },
-  "mason-lspconfig.nvim": { "branch": "main", "commit": "f2fa60409630ec2d24acf84494fb55e1d28d593c" },
+  "mason-lspconfig.nvim": { "branch": "main", "commit": "844d247d998c2f9a6a3baad8bb9748edc55ce69f" },
   "mason.nvim": { "branch": "main", "commit": "3671ab0d40aa5bd24b1686562bd0a23391ecf76a" },
   "neo-tree.nvim": { "branch": "v3.x", "commit": "cea666ef965884414b1b71f6b39a537f9238bdb2" },
-  "neoconf.nvim": { "branch": "main", "commit": "d0a2652eb8e9fc4e6f531a622c8f32eb78b44a98" },
+  "neoconf.nvim": { "branch": "main", "commit": "54097bc169c045f5fff6766b4600060fc9ef557a" },
   "neodev.nvim": { "branch": "main", "commit": "46aa467dca16cf3dfe27098042402066d2ae242d" },
   "neoformat": { "branch": "master", "commit": "2b11fb9fa383636de5de9ecc7c989436c4e0f9d1" },
   "neotest": { "branch": "master", "commit": "3c81345c28cd639fcc02843ed3653be462f47024" },
-  "neotest-jest": { "branch": "main", "commit": "44e499f5afdf8d6de8e0530889ca87d97b4e7074" },
+  "neotest-jest": { "branch": "main", "commit": "797515e113ac8e19c6855046d7f746d9c0c39c15" },
   "nui.nvim": { "branch": "main", "commit": "de740991c12411b663994b2860f1a4fd0937c130" },
   "nvim-autopairs": { "branch": "master", "commit": "23320e75953ac82e559c610bec5a90d9c6dfa743" },
   "nvim-dap": { "branch": "master", "commit": "5dd4d50f2e6a2eaf9e57fad023d294ef371bda35" },
@@ -32,5 +32,5 @@
   "telescope-ui-select.nvim": { "branch": "master", "commit": "6e51d7da30bd139a6950adf2a47fda6df9fa06d2" },
   "telescope.nvim": { "branch": "master", "commit": "b4da76be54691e854d3e0e02c36b0245f945c2c7" },
   "trouble.nvim": { "branch": "main", "commit": "85bedb7eb7fa331a2ccbecb9202d8abba64d37b3" },
-  "vscode-js-debug": { "branch": "main", "commit": "41c802115c16b25c5a4c3573c1b38b4ba58875e3" }
+  "vscode-js-debug": { "branch": "main", "commit": "f8f4253879aa6cd81e5c776a4f9a619771ec2fc3" }
 }
