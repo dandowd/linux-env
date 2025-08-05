@@ -125,7 +125,21 @@ require("lazy").setup({
 			},
 
 			-- (Default) Only show the documentation popup when manually triggered
-			completion = { documentation = { auto_show = false } },
+			completion = {
+        accept = {
+          auto_brackets = { enabled = false }
+        },
+				documentation = { auto_show = false },
+				menu = {
+					draw = {
+						columns = {
+							{ "label", "label_description", gap = 1 },
+							{ "kind_icon", "kind", gap = 1 },
+              { "source_name" }
+						},
+					},
+				},
+			},
 
 			-- Default list of enabled providers defined so that you can extend it
 			-- elsewhere in your config, without redefining it, due to `opts_extend`
@@ -133,7 +147,7 @@ require("lazy").setup({
 				default = { "lsp", "path", "snippets", "buffer" },
 			},
 
-      signature = { enabled = true },
+			signature = { enabled = true },
 
 			-- (Default) Rust fuzzy matcher for typo resistance and significantly better performance
 			-- You may use a lua implementation instead by using `implementation = "lua"` or fallback to the lua implementation,
