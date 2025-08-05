@@ -13,6 +13,7 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
+	"github/copilot.vim",
 	"nvim-telescope/telescope-ui-select.nvim",
 	"nvim-lua/plenary.nvim",
 	"leoluz/nvim-dap-go",
@@ -126,16 +127,16 @@ require("lazy").setup({
 
 			-- (Default) Only show the documentation popup when manually triggered
 			completion = {
-        accept = {
-          auto_brackets = { enabled = false }
-        },
+				accept = {
+					auto_brackets = { enabled = false },
+				},
 				documentation = { auto_show = false },
 				menu = {
 					draw = {
 						columns = {
 							{ "label", "label_description", gap = 1 },
 							{ "kind_icon", "kind", gap = 1 },
-              { "source_name" }
+							{ "source_name" },
 						},
 					},
 				},
@@ -157,6 +158,14 @@ require("lazy").setup({
 			fuzzy = { implementation = "prefer_rust_with_warning" },
 		},
 		opts_extend = { "sources.default" },
+	},
+	{
+		"olimorris/codecompanion.nvim",
+		opts = {},
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"nvim-treesitter/nvim-treesitter",
+		},
 	},
 })
 

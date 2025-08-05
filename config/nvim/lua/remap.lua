@@ -75,6 +75,9 @@ vim.keymap.set("i", "<C-J>", 'copilot#Accept("\\<CR>")', {
 	replace_keycodes = false,
 })
 
+vim.keymap.set("i", "<C-q>", ':CodeCompanionChat Toggle <CR>')
+vim.keymap.set("n", "<C-q>", ':CodeCompanionChat Toggle <CR>')
+
 vim.keymap.set("n", "<leader>l", function()
   vim.o.relativenumber = not vim.o.relativenumber
 end, { desc = "Toggle relative line numbers" })
