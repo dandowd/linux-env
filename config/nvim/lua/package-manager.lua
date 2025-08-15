@@ -27,7 +27,7 @@ require("lazy").setup({
 	},
 	{
 		"microsoft/vscode-js-debug",
-    tag = "v1.102.0",
+		tag = "v1.102.0",
 		opt = true,
 		build = "npm install --legacy-peer-deps && npx gulp dapDebugServer && mv dist out",
 	},
@@ -61,13 +61,13 @@ require("lazy").setup({
 			"nvim-lua/plenary.nvim",
 			"antoinemadec/FixCursorHold.nvim",
 			"nvim-treesitter/nvim-treesitter",
-			{"nvim-neotest/neotest-jest", commit = '797515e'},
+			{ "nvim-neotest/neotest-jest", commit = "797515e" },
 		},
 		config = function()
 			require("neotest").setup({
 				adapters = {
-					require('neotest-jest')
-        },
+					require("neotest-jest"),
+				},
 				output = {
 					enable = false,
 					open_on_run = false,
@@ -135,9 +135,10 @@ require("lazy").setup({
 				menu = {
 					draw = {
 						columns = {
-							{ "label", "label_description", gap = 1 },
+							{ "label", gap = 1 },
 							{ "kind_icon", "kind", gap = 1 },
 							{ "source_name" },
+							{ "label_description" },
 						},
 					},
 				},
