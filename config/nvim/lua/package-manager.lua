@@ -13,14 +13,27 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-	"github/copilot.vim",
-	"nvim-telescope/telescope-ui-select.nvim",
+	{
+		"github/copilot.vim",
+		event = "VeryLazy",
+	},
+	{
+		"nvim-telescope/telescope-ui-select.nvim",
+		event = "VeryLazy",
+	},
 	"nvim-lua/plenary.nvim",
-	"leoluz/nvim-dap-go",
-	{ "ellisonleao/gruvbox.nvim", priority = 1000 },
-	"sbdchd/neoformat",
+	{
+		"leoluz/nvim-dap-go",
+		ft = "go",
+	},
+	{ "ellisonleao/gruvbox.nvim", priority = 1000, lazy = false },
+	{
+		"sbdchd/neoformat",
+		cmd = "Neoformat",
+	},
 	{
 		"goolord/alpha-nvim",
+		event = "VimEnter",
 		config = function()
 			require("alpha").setup(require("alpha.themes.dashboard").config)
 		end,
@@ -37,23 +50,65 @@ require("lazy").setup({
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"MunifTanjim/nui.nvim",
-			"nvim-tree/nvim-web-devicons", -- optional, but recommended
+			"nvim-tree/nvim-web-devicons",
 		},
-		lazy = false, -- neo-tree will lazily load itself
+		cmd = { "Neotree" },
+		keys = {
+			{ "<leader>e", ":Neotree toggle<CR>", desc = "Toggle Neotree" },
+		},
 	},
-	{ "ahmedkhalf/project.nvim" },
-	{ "b0o/schemastore.nvim" },
-	{ "folke/neoconf.nvim", cmd = "Neoconf" },
-	"folke/trouble.nvim",
-	"folke/neodev.nvim",
-	"nvim-treesitter/nvim-treesitter",
+	{ 
+		"ahmedkhalf/project.nvim",
+		event = "VeryLazy",
+	},
+	{ 
+		"b0o/schemastore.nvim",
+		ft = "json",
+	},
+	{ "folke/neoconf.nvim", cmd = "Neoconf", lazy = false, priority = 1000 },
+	{
+		"folke/trouble.nvim",
+		cmd = { "Trouble" },
+		config = function()
+			require("trouble").setup()
+		end,
+	},
+	{
+		"folke/neodev.nvim",
+		ft = "lua",
+	},
+	{
+		"nvim-treesitter/nvim-treesitter",
+		event = { "BufReadPost", "BufNewFile" },
+		build = ":TSUpdate",
+	},
 	{
 		"neovim/nvim-lspconfig",
+		event = { "BufReadPre", "BufNewFile" },
 	},
-	"williamboman/mason-lspconfig.nvim",
-	"williamboman/mason.nvim",
-	"mfussenegger/nvim-dap",
-	"rcarriga/nvim-dap-ui",
+	{
+		"williamboman/mason-lspconfig.nvim",
+		event = { "BufReadPre", "BufNewFile" },
+		config = function()
+			require("mason-lspconfig").setup()
+		end,
+	},
+	{
+		"williamboman/mason.nvim",
+		cmd = "Mason",
+		event = { "BufReadPre", "BufNewFile" },
+		config = function()
+			require("mason").setup()
+		end,
+	},
+	{
+		"mfussenegger/nvim-dap",
+		event = "VeryLazy",
+	},
+	{
+		"rcarriga/nvim-dap-ui",
+		event = "VeryLazy",
+	},
 	{
 		"nvim-neotest/neotest",
 		dependencies = {
@@ -63,6 +118,8 @@ require("lazy").setup({
 			"nvim-treesitter/nvim-treesitter",
 			{ "nvim-neotest/neotest-jest", commit = "797515e" },
 		},
+		cmd = { "Neotest" },
+		ft = { "javascript", "typescript", "javascriptreact", "typescriptreact" },
 		config = function()
 			require("neotest").setup({
 				adapters = {
@@ -83,11 +140,41 @@ require("lazy").setup({
 			})
 		end,
 	},
-	"nvim-tree/nvim-web-devicons",
-	{ "nvim-telescope/telescope.nvim" },
-	"nvim-lualine/lualine.nvim",
-	"nvim-telescope/telescope-file-browser.nvim",
-	"windwp/nvim-autopairs",
+	{
+		"nvim-tree/nvim-web-devicons",
+		lazy = true,
+	},
+	{ 
+		"nvim-telescope/telescope.nvim",
+		cmd = "Telescope",
+		keys = {
+			{ "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find files" },
+			{ "<leader>fg", "<cmd>Telescope live_grep<cr>", desc = "Live grep" },
+			{ "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "Buffers" },
+		},
+		config = function()
+			require("telescope").load_extension("file_browser")
+			require("telescope").load_extension("ui-select")
+		end,
+	},
+	{
+		"nvim-lualine/lualine.nvim",
+		event = "VeryLazy",
+		config = function()
+			require("lualine").setup()
+		end,
+	},
+	{
+		"nvim-telescope/telescope-file-browser.nvim",
+		event = "VeryLazy",
+	},
+	{
+		"windwp/nvim-autopairs",
+		event = "InsertEnter",
+		config = function()
+			require("nvim-autopairs").setup()
+		end,
+	},
 	{
 		"saghen/blink.cmp",
 		-- optional: provides snippets for the snippet source
@@ -163,6 +250,7 @@ require("lazy").setup({
 	},
 	{
 		"olimorris/codecompanion.nvim",
+		cmd = { "CodeCompanion", "CodeCompanionChat", "CodeCompanionActions" },
 		opts = {},
 		dependencies = {
 			"nvim-lua/plenary.nvim",
@@ -176,13 +264,3 @@ require("lazy").setup({
 
 -- This must come before lsp config
 require("neoconf").setup({})
-
-require("mason").setup()
-require("mason-lspconfig").setup()
-
-require("lualine").setup()
-require("trouble").setup()
-
-require("telescope").load_extension("file_browser")
-require("telescope").load_extension("ui-select")
-require("nvim-autopairs").setup()

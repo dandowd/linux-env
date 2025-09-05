@@ -1,8 +1,12 @@
 require("package-manager")
-require("treesitter-config")
 require("settings")
 require("remap")
-require("telescope-config")
-require("dap-config")
-require("plugins")
-require("macros")
+
+-- Defer non-essential configs
+vim.defer_fn(function()
+	require("treesitter-config")
+	require("telescope-config") 
+	require("dap-config")
+	require("plugins")
+	require("macros")
+end, 0)
