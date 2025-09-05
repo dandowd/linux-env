@@ -14,7 +14,12 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
 	{
-		"github/copilot.vim",
+		"awslabs/amazonq.nvim",
+		config = function()
+			require("amazonq").setup({
+				ssoStartUrl = "https://view.awsapps.com/start",
+			})
+		end,
 		event = "VeryLazy",
 	},
 	{
@@ -57,11 +62,11 @@ require("lazy").setup({
 			{ "<leader>e", ":Neotree toggle<CR>", desc = "Toggle Neotree" },
 		},
 	},
-	{ 
+	{
 		"ahmedkhalf/project.nvim",
 		event = "VeryLazy",
 	},
-	{ 
+	{
 		"b0o/schemastore.nvim",
 		ft = "json",
 	},
@@ -144,7 +149,7 @@ require("lazy").setup({
 		"nvim-tree/nvim-web-devicons",
 		lazy = true,
 	},
-	{ 
+	{
 		"nvim-telescope/telescope.nvim",
 		cmd = "Telescope",
 		keys = {
