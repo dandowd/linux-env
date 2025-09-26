@@ -2,12 +2,6 @@ fpath+=("$(brew --prefix)/share/zsh/site-functions")
 autoload -U promptinit; promptinit
 prompt pure
 
-function kube_prompt() {
-  echo '⎈ $(kubectl config current-context 2>/dev/null)'
-}
-
-RPROMPT="$(kube_prompt)"
-
 bindkey -v
 
 export FZF_DEFAULT_COMMAND='fd --color always --type file --strip-cwd-prefix --hidden --follow -E .git -E node_modules'
@@ -63,7 +57,7 @@ bindkey -v
 bindkey '^R' history-incremental-search-backward
 
 ### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
-export PATH="/Users/danieldowd/.rd/bin:$PATH"
+export PATH="/Users/dandowd/.rd/bin:$PATH"
 ### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
 # =============================================================================
 #
@@ -143,7 +137,12 @@ function __zoxide_zi() {
 #
  eval "$(zoxide init zsh)"
 
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-
 source ~/.config/.env_secrets
+
+export LDFLAGS="-L/opt/homebrew/opt/zlib/lib"
+export CPPFLAGS="-I/opt/homebrew/opt/zlib/include"
+
+#export PYENV_ROOT="$HOME/.pyenv"
+#export PATH="$PYENV_ROOT/bin:$PATH"
+#eval "$(pyenv init -)"
+export PROJ_DIR=$(brew --prefix proj)
