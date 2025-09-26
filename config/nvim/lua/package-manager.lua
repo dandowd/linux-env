@@ -14,15 +14,6 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
 	{
-		"awslabs/amazonq.nvim",
-		config = function()
-			require("amazonq").setup({
-				ssoStartUrl = "https://view.awsapps.com/start",
-			})
-		end,
-		event = "VeryLazy",
-	},
-	{
 		"nvim-telescope/telescope-ui-select.nvim",
 		event = "VeryLazy",
 	},
