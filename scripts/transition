@@ -32,9 +32,19 @@ fi
 CURRENT_STATUS=$(echo "$TASK_INFO" | jq -r '.fields.status.name')
 echo "Current status: $CURRENT_STATUS"
 
+# Get available transitions for debugging
+echo "Getting available transitions..."
+TRANSITIONS=$(acli jira workitem transitions "$TASK_KEY" --json 2>/dev/null)
+if [[ $? -eq 0 ]]; then
+    echo "Available transitions:"
+    echo "$TRANSITIONS" | jq -r '.transitions[]? | "  - \(.name) (ID: \(.id))"'
+else
+    echo "Warning: Could not retrieve available transitions"
+fi
+
 # Find current status index in workflow
 CURRENT_INDEX=-1
-for i in {0..3}; do
+for i in {1..${#WORKFLOW_ORDER}}; do
     if [[ "${WORKFLOW_ORDER[$i]}" == "$CURRENT_STATUS" ]]; then
         CURRENT_INDEX=$i
         break
@@ -48,15 +58,16 @@ if [[ $CURRENT_INDEX -eq -1 ]]; then
 fi
 
 # Determine target status
+WORKFLOW_LENGTH=${#WORKFLOW_ORDER}
 if [[ "$DIRECTION" == "next" ]]; then
     TARGET_INDEX=$((CURRENT_INDEX + 1))
-    if [[ $TARGET_INDEX -ge 4 ]]; then
+    if [[ $TARGET_INDEX -gt $WORKFLOW_LENGTH ]]; then
         echo "Error: Task is already at the final status: $CURRENT_STATUS"
         exit 1
     fi
 else # back
     TARGET_INDEX=$((CURRENT_INDEX - 1))
-    if [[ $TARGET_INDEX -lt 0 ]]; then
+    if [[ $TARGET_INDEX -lt 1 ]]; then
         echo "Error: Task is already at the initial status: $CURRENT_STATUS"
         exit 1
     fi
@@ -65,16 +76,38 @@ fi
 TARGET_STATUS="${WORKFLOW_ORDER[$TARGET_INDEX]}"
 echo "Target status: $TARGET_STATUS"
 
+# Verify the target status is available as a transition
+if [[ -n "$TRANSITIONS" ]]; then
+    AVAILABLE_STATUS=$(echo "$TRANSITIONS" | jq -r --arg target "$TARGET_STATUS" '.transitions[]? | select(.to.name == $target) | .to.name')
+    if [[ -z "$AVAILABLE_STATUS" ]]; then
+        echo "Warning: '$TARGET_STATUS' is not available as a direct transition"
+        echo "Available target statuses:"
+        echo "$TRANSITIONS" | jq -r '.transitions[]? | "  - \(.to.name)"'
+        echo ""
+        echo "The workflow order might not match your Jira configuration."
+    fi
+fi
+
 # Execute the transition directly using status name
 echo "Transitioning $TASK_KEY from '$CURRENT_STATUS' to '$TARGET_STATUS'..."
-acli jira workitem transition --key "$TASK_KEY" --status "$TARGET_STATUS"
 
-if [[ $? -eq 0 ]]; then
+# First try with status name
+acli jira workitem transition --key "$TASK_KEY" --status "$TARGET_STATUS"
+TRANSITION_RESULT=$?
+
+if [[ $TRANSITION_RESULT -eq 0 ]]; then
     echo "Successfully transitioned $TASK_KEY"
     # Show new status
     NEW_STATUS=$(acli jira workitem view "$TASK_KEY" --json | jq -r '.fields.status.name')
     echo "New status: $NEW_STATUS"
 else
-    echo "Error: Failed to transition $TASK_KEY"
+    echo "Error: Failed to transition $TASK_KEY to '$TARGET_STATUS'"
+    echo "This might be due to:"
+    echo "  1. The target status name doesn't match exactly"
+    echo "  2. The transition is not allowed from current status"
+    echo "  3. Missing permissions"
+    echo "  4. The workflow doesn't match the expected order"
+    echo ""
+    echo "Try using the available transitions shown above, or check your Jira workflow configuration."
     exit 1
 fi
