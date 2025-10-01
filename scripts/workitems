@@ -1,0 +1,2 @@
+#!/bin/zsh
+acli jira workitem search --jql "project = AGINTEL AND assignee = currentUser() AND sprint in openSprints()" --json | jq -r 'map([ { "key": .key, "status": .fields.status.name, "summary": .fields.summary } ])'
