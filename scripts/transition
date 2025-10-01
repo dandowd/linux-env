@@ -1,0 +1,80 @@
+#!/bin/zsh
+
+# transition - Move a Jira task to next or previous status
+# Usage: ./transition <task-key> <next|back>
+
+# Define workflow order
+WORKFLOW_ORDER=("To Do" "In Progress" "Review" "Done")
+
+if [[ $# -ne 2 ]]; then
+    echo "Usage: $0 <task-key> <next|back>"
+    echo "Example: $0 AGINTEL-123 next"
+    exit 1
+fi
+
+TASK_KEY="$1"
+DIRECTION="$2"
+
+if [[ "$DIRECTION" != "next" && "$DIRECTION" != "back" ]]; then
+    echo "Error: Direction must be 'next' or 'back'"
+    exit 1
+fi
+
+# Get current task status and available transitions
+echo "Getting current status and available transitions for $TASK_KEY..."
+TASK_INFO=$(acli jira workitem view "$TASK_KEY" --json)
+
+if [[ $? -ne 0 ]]; then
+    echo "Error: Could not retrieve task $TASK_KEY"
+    exit 1
+fi
+
+CURRENT_STATUS=$(echo "$TASK_INFO" | jq -r '.fields.status.name')
+echo "Current status: $CURRENT_STATUS"
+
+# Find current status index in workflow
+CURRENT_INDEX=-1
+for i in {0..3}; do
+    if [[ "${WORKFLOW_ORDER[$i]}" == "$CURRENT_STATUS" ]]; then
+        CURRENT_INDEX=$i
+        break
+    fi
+done
+
+if [[ $CURRENT_INDEX -eq -1 ]]; then
+    echo "Error: Current status '$CURRENT_STATUS' not found in workflow order"
+    echo "Workflow order: ${WORKFLOW_ORDER[*]}"
+    exit 1
+fi
+
+# Determine target status
+if [[ "$DIRECTION" == "next" ]]; then
+    TARGET_INDEX=$((CURRENT_INDEX + 1))
+    if [[ $TARGET_INDEX -ge 4 ]]; then
+        echo "Error: Task is already at the final status: $CURRENT_STATUS"
+        exit 1
+    fi
+else # back
+    TARGET_INDEX=$((CURRENT_INDEX - 1))
+    if [[ $TARGET_INDEX -lt 0 ]]; then
+        echo "Error: Task is already at the initial status: $CURRENT_STATUS"
+        exit 1
+    fi
+fi
+
+TARGET_STATUS="${WORKFLOW_ORDER[$TARGET_INDEX]}"
+echo "Target status: $TARGET_STATUS"
+
+# Execute the transition directly using status name
+echo "Transitioning $TASK_KEY from '$CURRENT_STATUS' to '$TARGET_STATUS'..."
+acli jira workitem transition --key "$TASK_KEY" --status "$TARGET_STATUS"
+
+if [[ $? -eq 0 ]]; then
+    echo "Successfully transitioned $TASK_KEY"
+    # Show new status
+    NEW_STATUS=$(acli jira workitem view "$TASK_KEY" --json | jq -r '.fields.status.name')
+    echo "New status: $NEW_STATUS"
+else
+    echo "Error: Failed to transition $TASK_KEY"
+    exit 1
+fi

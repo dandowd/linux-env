@@ -1,2 +1,86 @@
 #!/bin/zsh
-acli jira workitem search --jql "project = AGINTEL AND assignee = currentUser() AND sprint in openSprints()" --json | jq -r 'map([ { "key": .key, "status": .fields.status.name, "summary": .fields.summary } ])'
+
+# workitems - Display current user's work items with better formatting and optional subtasks
+# Shows work items from current sprints with status, summary, and optionally subtasks
+# Usage: workitems [--status STATUS_NAME] [--subtasks|-s]
+
+# Parse command line arguments
+TARGET_STATUS=""
+SHOW_SUBTASKS=false
+while [[ $# -gt 0 ]]; do
+    case $1 in
+        --status)
+            TARGET_STATUS="$2"
+            shift 2
+            ;;
+        --subtasks|-s)
+            SHOW_SUBTASKS=true
+            shift
+            ;;
+        --help|-h)
+            echo "Usage: workitems [--status STATUS_NAME] [--subtasks|-s]"
+            echo "  --status        Filter by specific status (e.g., 'In Progress', 'To Do')"
+            echo "  --subtasks, -s  Include subtasks in the output"
+            echo "  --help, -h      Show this help message"
+            exit 0
+            ;;
+        *)
+            echo "Unknown option: $1"
+            echo "Use --help for usage information"
+            exit 1
+            ;;
+    esac
+done
+
+# Build JQL query
+JQL_QUERY="project = AGINTEL AND assignee = currentUser() AND sprint in openSprints()"
+if [[ -n "$TARGET_STATUS" ]]; then
+    JQL_QUERY="$JQL_QUERY AND status = \"$TARGET_STATUS\""
+    echo "🎯 Current Sprint Work Items (Status: $TARGET_STATUS)"
+else
+    echo "🎯 Current Sprint Work Items"
+fi
+echo "=" | tr '=' '=' | head -c 50; echo
+
+# Get main work items
+WORK_ITEMS=$(acli jira workitem search --jql "$JQL_QUERY" --json)
+
+if [[ $? -ne 0 ]]; then
+    echo "❌ Error: Could not retrieve work items"
+    exit 1
+fi
+
+# Check if we have any work items
+ITEM_COUNT=$(echo "$WORK_ITEMS" | jq 'length')
+if [[ $ITEM_COUNT -eq 0 ]]; then
+    echo "📭 No work items found in current sprints"
+    exit 0
+fi
+
+# Process each work item - simplified and faster
+echo "$WORK_ITEMS" | jq -r '.[] | .key' | while read -r WORK_ITEM_KEY; do
+    # Display main work item info directly from search results
+    echo "$WORK_ITEMS" | jq -r --arg key "$WORK_ITEM_KEY" '
+    .[] | select(.key == $key) |
+    "📋 \(.key) - \(.fields.status.name)
+       \(.fields.summary)
+       Priority: \(.fields.priority.name // "None")
+       Type: \(.fields.issuetype.name)"
+    '
+    
+    # Get subtasks for this work item (only if --subtasks flag is set)
+    if [[ "$SHOW_SUBTASKS" == true ]]; then
+        SUBTASKS=$(acli jira workitem search --jql "parent = $WORK_ITEM_KEY" --json 2>/dev/null)
+        
+        if [[ $? -eq 0 ]] && [[ $(echo "$SUBTASKS" | jq 'length') -gt 0 ]]; then
+            SUBTASK_COUNT=$(echo "$SUBTASKS" | jq 'length')
+            echo "   Subtasks ($SUBTASK_COUNT):"
+            echo "$SUBTASKS" | jq -r '.[] | "      • \(.key) - \(.fields.status.name): \(.fields.summary)"'
+        else
+            echo "   No subtasks"
+        fi
+    fi
+    echo
+done
+
+echo "📊 Summary: $ITEM_COUNT work item(s) found"
