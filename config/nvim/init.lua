@@ -1,10 +1,10 @@
 if vim.g.vscode then
   -- no op for now
 else
+  require("remap")
   require("package-manager")
   require("telescope-config")
   require("settings")
-  require("remap")
 
   -- Defer non-essential configs
   vim.defer_fn(function()
