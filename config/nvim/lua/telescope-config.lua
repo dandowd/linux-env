@@ -54,6 +54,7 @@ vim.api.nvim_create_autocmd("VimEnter", {
 
 require("telescope").setup({
   defaults = {
+    path_display = { "smart" },
     mappings = {
       i = {
         ["<C-d>"] = actions.delete_buffer, -- delete buffer in insert mode
