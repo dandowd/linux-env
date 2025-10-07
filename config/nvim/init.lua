@@ -1,5 +1,5 @@
 if vim.g.vscode then
-  -- no op for now
+  require("remap")
 else
   require("remap")
   require("package-manager")
