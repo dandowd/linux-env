@@ -53,7 +53,17 @@ dap.configurations.typescript = {
 		processId = require("dap.utils").pick_process,
 		protocol = "inspector",
 		cwd = "${workspaceFolder}",
+    restart = true
 	},
+  {
+    type = 'pwa-node', -- or 'pwa-chrome' for browser debugging
+    request = 'attach',
+    name = 'Attach to Remote Node.js',
+    hostName = '127.0.0.1', -- or the IP address of your remote machine/container
+    port = 9229, -- The port your Node.js app is listening on
+    cwd = vim.fn.getcwd(), -- Current working directory for source mapping
+    restart = true
+  }
 }
 
 dap.configurations.javascript = {
