@@ -2,11 +2,13 @@
 
 # workitems - Display current user's work items with better formatting and optional subtasks
 # Shows work items from current sprints with status, summary, and optionally subtasks
-# Usage: workitems [--status STATUS_NAME] [--subtasks|-s]
+# Usage: workitems [--status STATUS_NAME] [--subtasks|-s] [--web|-w WORK_ITEM_KEY]
 
 # Parse command line arguments
 TARGET_STATUS=""
 SHOW_SUBTASKS=false
+OPEN_WEB=false
+WEB_WORK_ITEM=""
 while [[ $# -gt 0 ]]; do
     case $1 in
         --status)
@@ -17,10 +19,16 @@ while [[ $# -gt 0 ]]; do
             SHOW_SUBTASKS=true
             shift
             ;;
+        --web|-w)
+            OPEN_WEB=true
+            WEB_WORK_ITEM="$2"
+            shift 2
+            ;;
         --help|-h)
-            echo "Usage: workitems [--status STATUS_NAME] [--subtasks|-s]"
+            echo "Usage: workitems [--status STATUS_NAME] [--subtasks|-s] [--web|-w WORK_ITEM_KEY]"
             echo "  --status        Filter by specific status (e.g., 'In Progress', 'To Do')"
             echo "  --subtasks, -s  Include subtasks in the output"
+            echo "  --web, -w       Open specific work item in web browser (e.g., --web AGINTEL-123)"
             echo "  --help, -h      Show this help message"
             exit 0
             ;;
@@ -31,6 +39,25 @@ while [[ $# -gt 0 ]]; do
             ;;
     esac
 done
+
+# If --web flag is used with a work item key, just open that item and exit
+if [[ "$OPEN_WEB" == true && -n "$WEB_WORK_ITEM" ]]; then
+    echo "🌐 Opening $WEB_WORK_ITEM in browser..."
+    
+    # Get the Jira site URL from acli auth status
+    JIRA_SITE=$(acli jira auth status 2>/dev/null | grep "Site:" | awk '{print $2}')
+    
+    if [[ -n "$JIRA_SITE" ]]; then
+        BROWSE_URL="https://${JIRA_SITE}/browse/${WEB_WORK_ITEM}"
+        open "$BROWSE_URL"
+        echo "✅ Opened $WEB_WORK_ITEM in browser: $BROWSE_URL"
+    else
+        echo "❌ Error: Could not get Jira site URL from acli auth status"
+        echo "💡 Try running: acli jira auth status"
+        exit 1
+    fi
+    exit 0
+fi
 
 # Build JQL query
 JQL_QUERY="project = AGINTEL AND assignee = currentUser() AND sprint in openSprints()"
@@ -68,6 +95,8 @@ echo "$WORK_ITEMS" | jq -r '.[] | .key' | while read -r WORK_ITEM_KEY; do
        Type: \(.fields.issuetype.name)"
     '
     
+
+    
     # Get subtasks for this work item (only if --subtasks flag is set)
     if [[ "$SHOW_SUBTASKS" == true ]]; then
         SUBTASKS=$(acli jira workitem search --jql "parent = $WORK_ITEM_KEY" --json 2>/dev/null)
@@ -76,6 +105,8 @@ echo "$WORK_ITEMS" | jq -r '.[] | .key' | while read -r WORK_ITEM_KEY; do
             SUBTASK_COUNT=$(echo "$SUBTASKS" | jq 'length')
             echo "   Subtasks ($SUBTASK_COUNT):"
             echo "$SUBTASKS" | jq -r '.[] | "      • \(.key) - \(.fields.status.name): \(.fields.summary)"'
+            
+
         else
             echo "   No subtasks"
         fi
