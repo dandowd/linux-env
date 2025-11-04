@@ -19,6 +19,8 @@ local find_command = {
   "!__pycache__",
   "--glob",
   "!dist",
+  "--glob",
+  "!.next"
 }
 
 vim.keymap.set("n", "<leader>ff", function()
