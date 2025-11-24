@@ -57,7 +57,7 @@ bindkey -v
 bindkey '^R' history-incremental-search-backward
 
 ### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
-export PATH="/Users/dandowd/.rd/bin:$PATH"
+export PATH="$HOME/.rd/bin:$PATH"
 ### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
 
 export LDFLAGS="-L/opt/homebrew/opt/zlib/lib"
@@ -68,3 +68,5 @@ export CPPFLAGS="-I/opt/homebrew/opt/zlib/include"
 #eval "$(pyenv init -)"
 export PROJ_DIR=$(brew --prefix proj)
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+export PATH="$HOME/.nvm/versions/node/v*:$PATH"
