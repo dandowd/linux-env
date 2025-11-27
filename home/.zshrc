@@ -69,4 +69,4 @@ export CPPFLAGS="-I/opt/homebrew/opt/zlib/include"
 export PROJ_DIR=$(brew --prefix proj)
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-export PATH="$HOME/.nvm/versions/node/v*:$PATH"
+export PATH="$HOME/.nvm/versions/node/v**/bin:$PATH"
