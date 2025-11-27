@@ -13,6 +13,13 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
+  {
+    "f-person/git-blame.nvim",
+    event = "VeryLazy",
+    opt = {
+      enabled = false
+    }
+  },
 	{
 		"nvim-telescope/telescope-ui-select.nvim",
 		event = "VeryLazy",
@@ -36,7 +43,7 @@ require("lazy").setup({
 	},
 	{
 		"microsoft/vscode-js-debug",
-		tag = "v1.102.0",
+		-- tag = "v1.102.0",
 		opt = true,
 		build = "npm install --legacy-peer-deps && npx gulp dapDebugServer && mv dist out",
 	},

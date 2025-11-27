@@ -38,7 +38,26 @@ dap.adapters["pwa-node"] = {
 		args = { vim.fn.expand("~/.local/share/nvim/lazy/vscode-js-debug/out/src/dapDebugServer.js"), "${port}" },
 	},
 }
+
 dap.configurations.typescript = {
+  {
+    name = "Solace Health Server2",
+    type = "pwa-node",
+    request = "launch",
+    runtimeExecutable = "npm",
+    runtimeArgs = { "run", "dev" },
+    cwd = vim.fn.getcwd(),
+    console = "integratedTerminal",   -- behaves like VS Code's
+    internalConsoleOptions = "neverOpen",
+  },
+  {
+		type = "pwa-node",
+		request = "launch",
+		name = "Launch node",
+		cwd = "${workspaceFolder}",
+    runtimeExecutable = "npm",
+    runtimeArgs = {"run", "dev"},
+  },
 	{
 		type = "pwa-node",
 		request = "launch",

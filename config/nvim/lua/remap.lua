@@ -83,4 +83,6 @@ vim.keymap.set("n", "<leader>l", function()
   vim.o.relativenumber = not vim.o.relativenumber
 end, { desc = "Toggle relative line numbers" })
 
+vim.keymap.set("n", '<leader>b', ':GitBlameToggle <CR>')
+
 vim.g.copilot_no_tab_map = true
