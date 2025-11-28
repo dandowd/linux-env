@@ -16,7 +16,7 @@ require("lazy").setup({
   {
     "f-person/git-blame.nvim",
     event = "VeryLazy",
-    opt = {
+    opts = {
       enabled = false
     }
   },
