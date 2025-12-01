@@ -86,3 +86,8 @@ end, { desc = "Toggle relative line numbers" })
 vim.keymap.set("n", '<leader>b', ':GitBlameToggle <CR>')
 
 vim.g.copilot_no_tab_map = true
+
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+vim.opt.foldlevelstart = 99
+
