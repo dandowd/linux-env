@@ -67,6 +67,5 @@ export CPPFLAGS="-I/opt/homebrew/opt/zlib/include"
 #export PATH="$PYENV_ROOT/bin:$PATH"
 #eval "$(pyenv init -)"
 export PROJ_DIR=$(brew --prefix proj)
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-export PATH="$HOME/.nvm/versions/node/v**/bin:$PATH"
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
