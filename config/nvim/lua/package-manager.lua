@@ -119,15 +119,17 @@ require("lazy").setup({
 			"nvim-lua/plenary.nvim",
 			"antoinemadec/FixCursorHold.nvim",
 			"nvim-treesitter/nvim-treesitter",
-			{ "nvim-neotest/neotest-jest", commit = "797515e" },
+			{ "nvim-neotest/neotest-jest" },
 		},
 		cmd = { "Neotest" },
 		ft = { "javascript", "typescript", "javascriptreact", "typescriptreact" },
 		config = function()
 			require("neotest").setup({
 				adapters = {
-					require("neotest-jest"),
-				},
+					require("neotest-jest")({
+            jestCommand = "npm run run-jest --"
+          })
+        },
 				output = {
 					enable = false,
 					open_on_run = false,

@@ -28,6 +28,7 @@ vim.keymap.set("n", "<leader>ff", function()
 		find_command = find_command,
 	})
 end, {})
+vim.keymap.set("n", "<leader>fi", "<cmd>Telescope lsp_incoming_calls<CR>")
 vim.keymap.set("n", "<leader>fp", extensions.projects.projects, {})
 vim.keymap.set("n", "<leader>fg", builtin.live_grep, {})
 vim.keymap.set("n", "<leader>ft", builtin.buffers, {})
@@ -56,7 +57,13 @@ vim.api.nvim_create_autocmd("VimEnter", {
 
 require("telescope").setup({
   defaults = {
-    path_display = { "smart" },
+    layout_config = {
+      horizontal = {
+        height = 0.95,
+        width = 0.95
+      }
+    },
+    wrap_results = true,
     mappings = {
       i = {
         ["<C-d>"] = actions.delete_buffer, -- delete buffer in insert mode
