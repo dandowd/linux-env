@@ -13,13 +13,13 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-  {
-    "f-person/git-blame.nvim",
-    event = "VeryLazy",
-    opts = {
-      enabled = false
-    }
-  },
+	{
+		"f-person/git-blame.nvim",
+		event = "VeryLazy",
+		opts = {
+			enabled = false,
+		},
+	},
 	{
 		"nvim-telescope/telescope-ui-select.nvim",
 		event = "VeryLazy",
@@ -77,8 +77,15 @@ require("lazy").setup({
 		end,
 	},
 	{
-		"folke/neodev.nvim",
-		ft = "lua",
+		"folke/lazydev.nvim",
+		ft = "lua", -- only load on lua files
+		opts = {
+			library = {
+				-- See the configuration section for more details
+				-- Load luvit types when the `vim.uv` word is found
+				{ path = "${3rd}/luv/library", words = { "vim%.uv" } },
+			},
+		},
 	},
 	{
 		"nvim-treesitter/nvim-treesitter",
@@ -127,9 +134,9 @@ require("lazy").setup({
 			require("neotest").setup({
 				adapters = {
 					require("neotest-jest")({
-            jestCommand = "npm run run-jest --"
-          })
-        },
+						jestCommand = "npm run run-jest --",
+					}),
+				},
 				output = {
 					enable = false,
 					open_on_run = false,
@@ -166,7 +173,7 @@ require("lazy").setup({
 		"nvim-lualine/lualine.nvim",
 		event = "VeryLazy",
 		config = function()
-			require("lualine").setup()
+			require("lualine").setup({})
 		end,
 	},
 	{
@@ -254,13 +261,51 @@ require("lazy").setup({
 		opts_extend = { "sources.default" },
 	},
 	{
-		"olimorris/codecompanion.nvim",
-		cmd = { "CodeCompanion", "CodeCompanionChat", "CodeCompanionActions" },
-		opts = {},
+		"NickvanDyke/opencode.nvim",
 		dependencies = {
-			"nvim-lua/plenary.nvim",
-			"nvim-treesitter/nvim-treesitter",
+			-- Recommended for `ask()` and `select()`.
+			-- Required for `snacks` provider.
+			---@module 'snacks' <- Loads `snacks.nvim` types for configuration intellisense.
+			{ "folke/snacks.nvim", opts = { input = {}, picker = {}, terminal = {} } },
 		},
+		config = function()
+			---@type opencode.Opts
+			vim.g.opencode_opts = {
+				-- Your configuration, if any — see `lua/opencode/config.lua`, or "goto definition".
+			}
+
+			-- Required for `opts.events.reload`.
+			vim.o.autoread = true
+
+			-- Recommended/example keymaps.
+			vim.keymap.set({ "n", "x" }, "<C-a>", function()
+				require("opencode").ask("@this: ", { submit = true })
+			end, { desc = "Ask opencode" })
+			vim.keymap.set({ "n", "x" }, "<C-x>", function()
+				require("opencode").select()
+			end, { desc = "Execute opencode action…" })
+			vim.keymap.set({ "n", "t" }, "<C-.>", function()
+				require("opencode").toggle()
+			end, { desc = "Toggle opencode" })
+
+			vim.keymap.set({ "n", "x" }, "go", function()
+				return require("opencode").operator("@this ")
+			end, { expr = true, desc = "Add range to opencode" })
+			vim.keymap.set("n", "goo", function()
+				return require("opencode").operator("@this ") .. "_"
+			end, { expr = true, desc = "Add line to opencode" })
+
+			vim.keymap.set("n", "<S-C-u>", function()
+				require("opencode").command("session.half.page.up")
+			end, { desc = "opencode half page up" })
+			vim.keymap.set("n", "<S-C-d>", function()
+				require("opencode").command("session.half.page.down")
+			end, { desc = "opencode half page down" })
+
+			-- You may want these if you stick with the opinionated "<C-a>" and "<C-x>" above — otherwise consider "<leader>o".
+			vim.keymap.set("n", "+", "<C-a>", { desc = "Increment", noremap = true })
+			vim.keymap.set("n", "-", "<C-x>", { desc = "Decrement", noremap = true })
+		end,
 	},
 })
 
